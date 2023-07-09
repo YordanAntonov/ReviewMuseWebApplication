@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewMuse.Web", "ReviewMuse.Web.csproj", "{0BC136A2-835F-4688-942D-D0BE82C44ACA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{BAD72C0E-25F5-4EC5-B1A4-F0237A1B58B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{98870FE4-870F-45D3-ADBC-ADC881F9FB2E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{33946B81-DA58-46F3-82C5-A3F09F5F1606}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BC136A2-835F-4688-942D-D0BE82C44ACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BC136A2-835F-4688-942D-D0BE82C44ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BC136A2-835F-4688-942D-D0BE82C44ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BC136A2-835F-4688-942D-D0BE82C44ACA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0BC136A2-835F-4688-942D-D0BE82C44ACA} = {BAD72C0E-25F5-4EC5-B1A4-F0237A1B58B4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E704390C-D323-4DE8-AD61-CDDC992B2342}
+	EndGlobalSection
+EndGlobal
