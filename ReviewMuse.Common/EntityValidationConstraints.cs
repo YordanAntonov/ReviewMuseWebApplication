@@ -38,5 +38,11 @@
             public const int StatusMaxLength = 30;
             public const int StatusMinLength = 1;
         }
+
+        public static class Editor
+        {
+            public const int PhoneMaxLength = 15;
+            public const int PhoneMinLength = 7;
+        }
     }
 }

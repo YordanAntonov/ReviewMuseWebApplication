@@ -29,6 +29,7 @@
 
         public DbSet<CategoriesBooks> CategoriesBooks { get; set; } = null!;
 
-
+        public DbSet<Editor> Editors { get; set; } = null!;
     }
 }
+    

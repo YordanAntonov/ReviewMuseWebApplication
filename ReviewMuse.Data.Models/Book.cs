@@ -67,9 +67,8 @@
 
         public virtual ICollection<CategoriesBooks> BookCategories { get; set; } = null!;
         //We need to add collection from AuthorsBooks
-
-        //We need to add collection from UsersBooks
         public virtual ICollection<UsersBooks> BookUsers { get; set; } = null!;
         //We need to add collection from Reviews
+
     }
 }
