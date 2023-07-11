@@ -13,6 +13,7 @@
             this.RecordCreatedOn = DateTime.UtcNow;
 
             this.BookCategories = new HashSet<CategoriesBooks>();
+            this.BookUsers = new HashSet<UsersBooks>();
         }
 
         [Key]
@@ -64,11 +65,11 @@
         [Required]
         public virtual Language Language { get; set; } = null!;
 
-        //We need to add collection from CategoriesBooks
         public virtual ICollection<CategoriesBooks> BookCategories { get; set; } = null!;
         //We need to add collection from AuthorsBooks
 
         //We need to add collection from UsersBooks
+        public virtual ICollection<UsersBooks> BookUsers { get; set; } = null!;
         //We need to add collection from Reviews
     }
 }

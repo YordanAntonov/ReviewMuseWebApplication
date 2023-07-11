@@ -32,5 +32,11 @@
 
             public const int BookIsbnSize = 13;
         }
+
+        public static class Status
+        {
+            public const int StatusMaxLength = 30;
+            public const int StatusMinLength = 1;
+        }
     }
 }

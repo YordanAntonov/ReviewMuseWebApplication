@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ReviewMuse.Data.Models
+﻿namespace ReviewMuse.Data.Models
 {
-    internal class ApplicationUser
+
+    using Microsoft.AspNetCore.Identity;
+    using ReviewMuse.Data.Models.MappingTables;
+
+    public class ApplicationUser : IdentityUser<Guid>
     {
+        public ApplicationUser()
+        {
+            this.UserBooks = new HashSet<UsersBooks>();
+        }
+
+        public virtual ICollection<UsersBooks> UserBooks { get; set; } = null!;
     }
 }

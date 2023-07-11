@@ -23,7 +23,12 @@
 
         public DbSet<Language> Languages { get; set; } = null!;
 
+        public DbSet<BookStatus> BooksStatus { get; set; } = null!;
+
+        public DbSet<UsersBooks> UsersBooks { get; set; } = null!;
+
         public DbSet<CategoriesBooks> CategoriesBooks { get; set; } = null!;
+
 
     }
 }
