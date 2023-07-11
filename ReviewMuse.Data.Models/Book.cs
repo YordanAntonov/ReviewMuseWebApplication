@@ -1,5 +1,6 @@
 ﻿namespace ReviewMuse.Data.Models
 {
+    using ReviewMuse.Data.Models.MappingTables;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,6 +11,8 @@
         public Book()
         {
             this.RecordCreatedOn = DateTime.UtcNow;
+
+            this.BookCategories = new HashSet<CategoriesBooks>();
         }
 
         [Key]
@@ -62,7 +65,9 @@
         public virtual Language Language { get; set; } = null!;
 
         //We need to add collection from CategoriesBooks
+        public virtual ICollection<CategoriesBooks> BookCategories { get; set; } = null!;
         //We need to add collection from AuthorsBooks
+
         //We need to add collection from UsersBooks
         //We need to add collection from Reviews
     }

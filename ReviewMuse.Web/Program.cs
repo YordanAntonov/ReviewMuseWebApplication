@@ -1,9 +1,10 @@
 namespace ReviewMuse.Web
 {
-    using Microsoft.AspNetCore.Identity;
+
     using Microsoft.EntityFrameworkCore;
 
     using ReviewMuse.Data;
+    using ReviewMuse.Data.Models;
 
     public class Program
     {
@@ -17,7 +18,7 @@ namespace ReviewMuse.Web
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = true;
             })
