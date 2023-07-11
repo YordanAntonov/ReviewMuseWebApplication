@@ -14,6 +14,7 @@
 
             this.BookCategories = new HashSet<CategoriesBooks>();
             this.BookUsers = new HashSet<UsersBooks>();
+            this.Reviews = new HashSet<Review>();
         }
 
         [Key]
@@ -45,11 +46,11 @@
 
         public int TotalRating { get; set; }
 
-        //[ForeignKey(nameof(Editor))]
-        //public virtual Guid EditorId { get; set; } = null!;
+        [ForeignKey(nameof(Editor))]
+        public virtual Guid EditorId { get; set; }
 
-        //[Required]
-        //public virtual Editor Editor { get; set; } = null!;
+        [Required]
+        public virtual Editor Editor { get; set; } = null!;
 
 
         [ForeignKey(nameof(BookCover))]
@@ -65,10 +66,14 @@
         [Required]
         public virtual Language Language { get; set; } = null!;
 
-        public virtual ICollection<CategoriesBooks> BookCategories { get; set; } = null!;
-        //We need to add collection from AuthorsBooks
-        public virtual ICollection<UsersBooks> BookUsers { get; set; } = null!;
-        //We need to add collection from Reviews
 
+        public virtual ICollection<CategoriesBooks> BookCategories { get; set; } = null!;
+
+        public virtual ICollection<UsersBooks> BookUsers { get; set; } = null!;
+
+        public virtual ICollection<Review> Reviews { get; set; } = null!;
+
+
+        //We need to add collection from AuthorsBooks
     }
 }
