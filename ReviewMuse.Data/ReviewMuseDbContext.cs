@@ -2,6 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using ReviewMuse.Data.Models;
 
     public class ReviewMuseDbContext : IdentityDbContext
     {
@@ -11,6 +12,6 @@
             
         }
 
-
+        public DbSet<Category> Categories { get; set; }
     }
 }

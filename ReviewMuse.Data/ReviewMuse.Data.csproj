@@ -17,4 +17,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ReviewMuse.Data.Models\ReviewMuse.Data.Models.csproj" />
+  </ItemGroup>
+
 </Project>
