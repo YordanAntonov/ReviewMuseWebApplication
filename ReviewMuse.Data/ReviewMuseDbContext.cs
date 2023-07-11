@@ -13,12 +13,13 @@
             
         }
 
+        public DbSet<Book> Books { get; set; } = null!;
+
         public DbSet<Category> Categories { get; set; } = null!;
 
         public DbSet<BookCover> BookCovers { get; set; } = null!;
 
         public DbSet<Language> Languages { get; set; } = null!;
-
 
     }
 }
