@@ -1,4 +1,4 @@
-﻿namespace ReviewMuse.Data
+﻿namespace ReviewMuse.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
 
