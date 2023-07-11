@@ -10,6 +10,7 @@
         public Category()
         {
             this.BooksCategories = new HashSet<CategoriesBooks>();
+            this.AuthorsCategory = new HashSet<CategoriesAuthors>();
         }
 
         [Key]
@@ -21,6 +22,6 @@
 
         public virtual ICollection<CategoriesBooks> BooksCategories { get; set; } = null!;
 
-        //We need collection for AuthorsBooks...
+        public virtual ICollection<CategoriesAuthors> AuthorsCategory { get; set; } = null!;
     }
 }

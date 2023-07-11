@@ -1,10 +1,10 @@
 ﻿namespace ReviewMuse.Data.Models
 {
-    using ReviewMuse.Data.Models.MappingTables;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using static ReviewMuse.Common.EntityValidationConstraints.Book;
+    using ReviewMuse.Data.Models.MappingTables;
 
     public class Book
     {
@@ -13,6 +13,7 @@
             this.RecordCreatedOn = DateTime.UtcNow;
 
             this.BookCategories = new HashSet<CategoriesBooks>();
+            this.BookAuthors = new HashSet<AuthorsBooks>();
             this.BookUsers = new HashSet<UsersBooks>();
             this.Reviews = new HashSet<Review>();
         }
@@ -73,7 +74,6 @@
 
         public virtual ICollection<Review> Reviews { get; set; } = null!;
 
-
-        //We need to add collection from AuthorsBooks
+        public virtual ICollection<AuthorsBooks> BookAuthors { get; set; } = null!;
     }
 }

@@ -27,9 +27,17 @@
 
         public DbSet<UsersBooks> UsersBooks { get; set; } = null!;
 
+        public DbSet<CategoriesAuthors> CategoriesAuthors { get; set; } = null!;
+
         public DbSet<CategoriesBooks> CategoriesBooks { get; set; } = null!;
 
+        public DbSet<AuthorsBooks> AuthorsBooks { get; set; } = null!;
+
         public DbSet<Editor> Editors { get; set; } = null!;
+
+        public DbSet<Author> Authors { get; set; } = null!;
+
+        public DbSet<Review> Reviews { get; set; } = null!;
     }
 }
     

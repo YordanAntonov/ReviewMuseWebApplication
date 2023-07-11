@@ -44,5 +44,19 @@
             public const int PhoneMaxLength = 15;
             public const int PhoneMinLength = 7;
         }
+
+        public static class Author
+        {
+            public const int NameMaxLength = 300;
+            public const int NameMinLength = 1;
+
+            public const int DescriptionMinLength = 50;
+
+            public const int CityNameMaxLength = 100;
+            public const int CityNameMinLength = 2;
+
+            public const int CountryNameMaxLength = 100;
+            public const int CountryNameMinLength = 2;
+        }
     }
 }

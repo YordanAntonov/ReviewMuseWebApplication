@@ -32,5 +32,7 @@
         public string Comment { get; set; } = null!;
 
         public DateTime PostedOn { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

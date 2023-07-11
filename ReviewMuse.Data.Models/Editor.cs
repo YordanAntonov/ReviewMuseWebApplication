@@ -28,5 +28,7 @@ namespace ReviewMuse.Data.Models
         public DateTime DateOfBirth { get; set; }
 
         public DateTime EditorSince { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }
