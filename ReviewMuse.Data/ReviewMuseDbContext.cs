@@ -1,11 +1,13 @@
 ﻿namespace ReviewMuse.Data
 {
+    using System.Reflection;
+
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
     using ReviewMuse.Data.Models;
     using ReviewMuse.Data.Models.MappingTables;
-    using Microsoft.AspNetCore.Identity;
 
     public class ReviewMuseDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
@@ -38,6 +40,16 @@
         public DbSet<Author> Authors { get; set; } = null!;
 
         public DbSet<Review> Reviews { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            Assembly configAssembly = Assembly.GetAssembly(typeof(ReviewMuseDbContext)) ??
+                                      Assembly.GetExecutingAssembly();
+
+            builder.ApplyConfigurationsFromAssembly(configAssembly);
+
+            base.OnModelCreating(builder);
+        }
     }
 }
     
