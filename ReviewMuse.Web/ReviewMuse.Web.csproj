@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ReviewMuse.Data.Models\ReviewMuse.Data.Models.csproj" />
     <ProjectReference Include="..\ReviewMuse.Data\ReviewMuse.Data.csproj" />
   </ItemGroup>
 
