@@ -24,6 +24,12 @@
                 .HasForeignKey(u => u.ApplicationUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder
+                .HasOne(s => s.BookStatus)
+                .WithMany(s => s.BooksStatuses)
+                .HasForeignKey(s => s.BookStatusId)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }
