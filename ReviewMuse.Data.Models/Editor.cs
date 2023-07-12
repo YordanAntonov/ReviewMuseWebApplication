@@ -11,6 +11,7 @@ namespace ReviewMuse.Data.Models
         public Editor()
         {
             this.EditorSince = DateTime.UtcNow;
+            this.EditorBooks = new HashSet<Book>();
         }
 
         [Key]
@@ -30,5 +31,7 @@ namespace ReviewMuse.Data.Models
         public DateTime EditorSince { get; set; }
 
         public bool IsActive { get; set; }
+
+        public virtual ICollection<Book> EditorBooks { get; set; } = null!;
     }
 }
