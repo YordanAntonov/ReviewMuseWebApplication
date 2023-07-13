@@ -1,10 +1,11 @@
 namespace ReviewMuse.Web
 {
-
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
     using ReviewMuse.Data;
     using ReviewMuse.Data.Models;
+    using ReviewMuse.Web.Infrastructure.ModelBinders;
 
     public class Program
     {
@@ -13,6 +14,7 @@ namespace ReviewMuse.Web
             var builder = WebApplication.CreateBuilder(args);
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
             builder.Services.AddDbContext<ReviewMuseDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
@@ -35,7 +37,13 @@ namespace ReviewMuse.Web
             })
                 .AddEntityFrameworkStores<ReviewMuseDbContext>();
 
-            builder.Services.AddControllersWithViews();
+            builder.Services
+                .AddControllersWithViews()
+                .AddMvcOptions(options =>
+                {
+                    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+                });
 
             var app = builder.Build();
 
