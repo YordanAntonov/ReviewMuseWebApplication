@@ -20,6 +20,10 @@
         [MaxLength(NameMaxLength)]
         public string CategoryName { get; set; } = null!;
 
+        [Required]
+        [MaxLength]
+        public string Description { get; set; } = null!;
+
         public virtual ICollection<CategoriesBooks> BooksCategories { get; set; } = null!;
 
         public virtual ICollection<CategoriesAuthors> AuthorsCategory { get; set; } = null!;

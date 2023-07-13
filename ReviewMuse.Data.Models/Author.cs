@@ -19,6 +19,9 @@
         [MaxLength(NameMaxLength)]
         public string FullName { get; set; } = null!;
 
+        [MaxLength(AuthorPseudonimMaxLength)]
+        public string? Pseudonim { get; set; }
+
         [Required]
         [MaxLength]
         public string Description { get; set; } = null!;

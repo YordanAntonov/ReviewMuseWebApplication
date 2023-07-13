@@ -6,6 +6,8 @@
         {
             public const int NameMaxLength = 70;
             public const int NameMinLength = 1;
+
+            public const int DescriptionMinLength = 50;
         }
 
         public static class BookCoverType
@@ -52,11 +54,14 @@
 
             public const int DescriptionMinLength = 50;
 
-            public const int CityNameMaxLength = 100;
+            public const int CityNameMaxLength = 300;
             public const int CityNameMinLength = 2;
 
-            public const int CountryNameMaxLength = 100;
+            public const int CountryNameMaxLength = 300;
             public const int CountryNameMinLength = 2;
+
+            public const int AuthorPseudonimMaxLength = 300;
+            public const int AuthorPseudonimMinLength = 1;
         }
     }
 }
