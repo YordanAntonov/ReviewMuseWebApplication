@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.18" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.18" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.18" />
@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ReviewMuse.Data.Models\ReviewMuse.Data.Models.csproj" />
     <ProjectReference Include="..\ReviewMuse.Data\ReviewMuse.Data.csproj" />
+    <ProjectReference Include="..\ReviewMuse.Web.Infrastructure\ReviewMuse.Web.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

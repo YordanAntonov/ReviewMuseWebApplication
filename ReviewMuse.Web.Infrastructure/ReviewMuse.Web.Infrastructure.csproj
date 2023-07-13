@@ -10,8 +10,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.18" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ReviewMuse.Common\ReviewMuse.Common.csproj" />
-  </ItemGroup>
-
 </Project>

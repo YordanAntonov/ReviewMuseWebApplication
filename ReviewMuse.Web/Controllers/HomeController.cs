@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ReviewMuse.Web.Models;
-using System.Diagnostics;
-
-namespace ReviewMuse.Web.Controllers
+﻿namespace ReviewMuse.Web.Controllers
 {
+    using System.Diagnostics;
+
+    using Microsoft.AspNetCore.Mvc;
+
+    using ReviewMuse.Web.Models;
+
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,10 +21,6 @@ namespace ReviewMuse.Web.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
