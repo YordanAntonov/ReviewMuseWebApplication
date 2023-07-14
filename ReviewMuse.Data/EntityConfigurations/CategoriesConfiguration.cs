@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ReviewMuse.Data.Models;
-
-namespace ReviewMuse.Data.EntityConfigurations
+﻿namespace ReviewMuse.Data.EntityConfigurations
 {
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+    using ReviewMuse.Data.Models;
+
     public class CategoriesConfiguration : IEntityTypeConfiguration<Category>
     {
         public void Configure(EntityTypeBuilder<Category> builder)
@@ -432,7 +433,7 @@ namespace ReviewMuse.Data.EntityConfigurations
                 CategoryName = "Bulgarian Literature",
                 Description = "Discover the captivating world of Bulgarian literature, where the rich heritage, culture, and spirit of Bulgaria come alive through the written word. Bulgarian literature encompasses a diverse range of genres, from poetry and novels to short stories and plays. It reflects the unique Bulgarian identity, exploring themes of love, longing, resilience, and the complexities of human nature. Through vivid descriptions, evocative storytelling, and a deep connection to the country's history and folklore, Bulgarian literature offers a glimpse into the soul of Bulgaria. Whether delving into the timeless works of classic Bulgarian authors or exploring the vibrant contemporary literary scene, Bulgarian literature invites readers on a journey of discovery, where tradition, passion, and the beauty of the Bulgarian language converge. So immerse yourself in the pages of Bulgarian literature and let the words transport you to the enchanting landscapes, intriguing characters, and profound emotions that define this rich literary tradition."
             };
-
+            categories.Add(category);
 
             return categories.ToArray();
         }

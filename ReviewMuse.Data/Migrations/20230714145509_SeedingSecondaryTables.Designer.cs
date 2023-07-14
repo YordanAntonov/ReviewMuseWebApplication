@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReviewMuse.Data;
 
@@ -11,9 +12,10 @@ using ReviewMuse.Data;
 namespace ReviewMuse.Data.Migrations
 {
     [DbContext(typeof(ReviewMuseDbContext))]
-    partial class ReviewMuseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230714145509_SeedingSecondaryTables")]
+    partial class SeedingSecondaryTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
