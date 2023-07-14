@@ -12,6 +12,7 @@ namespace ReviewMuse.Web.Areas.Identity.Pages.Account
     using Microsoft.Extensions.Logging;
 
     using ReviewMuse.Data.Models;
+    using static ReviewMuse.Common.IdentityValidationConstraints.UsernameValidations;
 
 
     public class LoginModel : PageModel
@@ -62,8 +63,9 @@ namespace ReviewMuse.Web.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            [StringLength(UsernameMaxLength, MinimumLength = UsernameMinLength, ErrorMessage = "Username must be between 6 and 50 characters long!")]
+            [Display(Name = "Username")]
+            public string Username { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -108,11 +110,15 @@ namespace ReviewMuse.Web.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
+                }
+                else if (result.IsNotAllowed)
+                {
+                    ModelState.AddModelError(string.Empty, "Wrong username or password!");
                 }
                 if (result.RequiresTwoFactor)
                 {
