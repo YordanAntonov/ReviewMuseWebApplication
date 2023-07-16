@@ -11,7 +11,7 @@
     {
         public void Configure(EntityTypeBuilder<Author> builder)
         {
-            //builder.HasData(this.GenerateAuthors());
+            builder.HasData(this.GenerateAuthors());
         }
 
         private Author[] GenerateAuthors()
