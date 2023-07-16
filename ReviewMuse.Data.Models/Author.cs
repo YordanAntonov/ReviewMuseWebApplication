@@ -8,6 +8,8 @@
     {
         public Author()
         {
+            this.Id = Guid.NewGuid();
+
             this.AuthorBooks = new HashSet<AuthorsBooks>();
             this.AuthorCategories = new HashSet<CategoriesAuthors>();
         }
