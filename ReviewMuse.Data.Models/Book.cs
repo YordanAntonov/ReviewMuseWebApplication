@@ -10,6 +10,7 @@
     {
         public Book()
         {
+            this.Id = Guid.NewGuid();
             this.RecordCreatedOn = DateTime.UtcNow;
 
             this.BookCategories = new HashSet<CategoriesBooks>();
