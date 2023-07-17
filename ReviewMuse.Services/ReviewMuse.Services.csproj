@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ReviewMuse.Data\ReviewMuse.Data.csproj" />
+    <ProjectReference Include="..\ReviewMuse.Web.Models\ReviewMuse.Web.Models.csproj" />
+  </ItemGroup>
+
+</Project>

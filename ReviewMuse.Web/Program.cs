@@ -5,6 +5,8 @@ namespace ReviewMuse.Web
 
     using ReviewMuse.Data;
     using ReviewMuse.Data.Models;
+    using ReviewMuse.Services.BookService;
+    using ReviewMuse.Services.Contracts;
     using ReviewMuse.Web.Infrastructure.ModelBinders;
 
     public class Program
@@ -44,6 +46,9 @@ namespace ReviewMuse.Web
                     options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
                     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
                 });
+
+            //Services
+            builder.Services.AddScoped<IBookService, BookService>();
 
             var app = builder.Build();
 
