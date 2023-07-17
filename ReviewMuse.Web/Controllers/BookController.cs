@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ReviewMuse.Services.Contracts;
 using ReviewMuse.Web.Models.ExportModels;
 
@@ -13,9 +14,11 @@ namespace ReviewMuse.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> AllBooks()
         {
             IEnumerable<ExpoAllBooksViewModel> model = await this.bookService.GetAllBooksAsync();
+           
 
             return View(model);
         }

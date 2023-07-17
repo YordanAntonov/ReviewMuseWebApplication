@@ -1,9 +1,12 @@
 ﻿@model IEnumerable<ExpoAllBooksViewModel>
+@{
+    ViewData["Title"] = "ReviewMuse - All Books";
+}
 
-<div class="container-fluid" style="margin-left:60px">
+<div class="container-fluid" style="margin-left:300px">
 
     <div class="row">
-        <div class="col-md-8 d-flex justify-content-center" style="margin-top:60px">
+        <div class="col-md-9 d-flex justify-content-center" style="margin-top:60px">
 
             <table class="table table-stacked">
                 <thead>
@@ -11,7 +14,7 @@
                         <th>Cover</th>
                         <th>Title</th>
                         <th>Authors</th>
-                        <th>Rating</th>
+                        <th>Total Rating</th>
                         <th>PublishedDate</th>
                     </tr>
                 </thead>
@@ -25,8 +28,8 @@
                             {
                                 <td>@name</td>
                             }
-                            <td>@book.BookRating</td>
-                            <td>@book.PublishedDate</td>
+                            <td>@book.BookRating <span class="glyphicon glyphicon-star"></span></td>
+                            <td>@book.PublishedDate  <span class="glyphicon glyphicon-calendar"></span></td>
                         </tr>
                     }
                 </tbody>
