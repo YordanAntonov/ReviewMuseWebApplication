@@ -9,7 +9,7 @@
     {
         public void Configure(EntityTypeBuilder<BookStatus> builder)
         {
-            builder.HasData(this.GenerateBookStatuses());
+            //builder.HasData(this.GenerateBookStatuses());
         }
 
         private BookStatus[] GenerateBookStatuses()

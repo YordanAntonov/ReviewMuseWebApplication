@@ -9,7 +9,7 @@
     {
         public void Configure(EntityTypeBuilder<CategoriesAuthors> builder)
         {
-            builder.HasData(this.GenerateCategoriesAuthors());
+            //builder.HasData(this.GenerateCategoriesAuthors());
 
             builder
                 .HasKey(entity => new { entity.CategoryId, entity.AuthorId });

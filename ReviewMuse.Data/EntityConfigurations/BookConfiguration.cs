@@ -11,7 +11,7 @@
     {
         public void Configure(EntityTypeBuilder<Book> builder)
         {
-            builder.HasData(this.GenerateBooks());
+            //builder.HasData(this.GenerateBooks());
 
             builder
                 .HasOne(e => e.Editor)
