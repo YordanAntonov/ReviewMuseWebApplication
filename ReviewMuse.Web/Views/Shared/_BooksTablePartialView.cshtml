@@ -1,0 +1,26 @@
+﻿<table class="table table-stacked">
+    <thead>
+        <tr>
+            <th>Cover</th>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>Total Rating</th>
+            <th>First Published</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in @Model.Books)
+        {
+            <tr class="bookalike review">
+                <td><img src="@book.ImageUrl" alt="@book.Title cover photo." width="50" height="82"></td>
+                <td>@book.Title</td>
+                @foreach (var name in book.AuthorsNames)
+                {
+                    <td>@name</td>
+                }
+                <td>@book.BookRating <span class="glyphicon glyphicon-star"></span></td>
+                <td>@book.PublishedDate  <span class="glyphicon glyphicon-calendar"></span></td>
+            </tr>
+        }
+    </tbody>
+</table>

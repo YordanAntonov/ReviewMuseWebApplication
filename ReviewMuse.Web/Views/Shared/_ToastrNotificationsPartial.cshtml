@@ -1,6 +1,7 @@
 ﻿@using static ReviewMuse.Common.ToastrMessages;
 
 <script>toastr.options.closeButton = true;</script>
+<script>toastr.options.progressBar = true;</script>
 @if (TempData.ContainsKey(ErrorMessage))
 {
     <script>toastr.error('@TempData[ErrorMessage]');</script>

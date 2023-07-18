@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ReviewMuse.Common\ReviewMuse.Common.csproj" />
+    <ProjectReference Include="..\ReviewMuse.Web.Models\ReviewMuse.Web.Models.csproj" />
   </ItemGroup>
 
 </Project>

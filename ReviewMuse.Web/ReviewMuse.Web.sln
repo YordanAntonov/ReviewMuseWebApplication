@@ -19,9 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReviewMuse.Common", "..\Rev
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReviewMuse.Web.Infrastructure", "..\ReviewMuse.Web.Infrastructure\ReviewMuse.Web.Infrastructure.csproj", "{12DAF421-5123-4AE1-8F2A-FC1261AC3CC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewMuse.Web.Models", "..\ReviewMuse.Web.Models\ReviewMuse.Web.Models.csproj", "{7608D671-E984-4678-BA15-CDE8FDB4FE3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReviewMuse.Web.Models", "..\ReviewMuse.Web.Models\ReviewMuse.Web.Models.csproj", "{7608D671-E984-4678-BA15-CDE8FDB4FE3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewMuse.Services", "..\ReviewMuse.Services\ReviewMuse.Services.csproj", "{0DADC09F-BC73-4639-9308-93DA831CE773}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReviewMuse.Services", "..\ReviewMuse.Services\ReviewMuse.Services.csproj", "{0DADC09F-BC73-4639-9308-93DA831CE773}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewMuse.Services.Models", "..\ReviewMuse.Services.Models\ReviewMuse.Services.Models.csproj", "{94A50684-CD82-4EAA-A96B-3AED68A41F7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{0DADC09F-BC73-4639-9308-93DA831CE773}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DADC09F-BC73-4639-9308-93DA831CE773}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DADC09F-BC73-4639-9308-93DA831CE773}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94A50684-CD82-4EAA-A96B-3AED68A41F7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94A50684-CD82-4EAA-A96B-3AED68A41F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94A50684-CD82-4EAA-A96B-3AED68A41F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94A50684-CD82-4EAA-A96B-3AED68A41F7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{12DAF421-5123-4AE1-8F2A-FC1261AC3CC5} = {BAD72C0E-25F5-4EC5-B1A4-F0237A1B58B4}
 		{7608D671-E984-4678-BA15-CDE8FDB4FE3F} = {BAD72C0E-25F5-4EC5-B1A4-F0237A1B58B4}
 		{0DADC09F-BC73-4639-9308-93DA831CE773} = {98870FE4-870F-45D3-ADBC-ADC881F9FB2E}
+		{94A50684-CD82-4EAA-A96B-3AED68A41F7A} = {98870FE4-870F-45D3-ADBC-ADC881F9FB2E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E704390C-D323-4DE8-AD61-CDDC992B2342}
