@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ReviewMuse.Data;
-using ReviewMuse.Services.Contracts;
-using ReviewMuse.Web.Models.ExportModels;
-
-namespace ReviewMuse.Services.BookService
+﻿namespace ReviewMuse.Services.BookService
 {
+    using Microsoft.EntityFrameworkCore;
+
+    using ReviewMuse.Data;
+    using ReviewMuse.Services.Contracts;
+    using ReviewMuse.Web.Models.ExportModels;
+
     public class BookService : IBookService
     {
         private readonly ReviewMuseDbContext dbContext;
@@ -17,6 +18,7 @@ namespace ReviewMuse.Services.BookService
         {
             return await this.dbContext
                 .Books
+                .Where(b => b.IsActive)
                 .Select(b => new ExpoAllBooksViewModel()
                 {
                     BookId = b.Id.ToString(),
@@ -26,8 +28,9 @@ namespace ReviewMuse.Services.BookService
                     .ToArray()!,
                     ImageUrl = b.ImageUrl,
                     BookRating = b.TotalRating,
-                    PublishedDate = b.PublishingDate.ToString("yyyy-MM-dd")
+                    PublishedDate = b.PublishingDate.ToString("dd MMM yyyy")
                 })
+                .OrderBy(b => b.Title)
                 .ToListAsync();
         }
     }

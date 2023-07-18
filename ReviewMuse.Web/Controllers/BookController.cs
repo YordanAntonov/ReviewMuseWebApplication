@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using ReviewMuse.Services.Contracts;
-using ReviewMuse.Web.Models.ExportModels;
-
-namespace ReviewMuse.Web.Controllers
+﻿namespace ReviewMuse.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
+    using ReviewMuse.Services.Contracts;
+    using ReviewMuse.Web.Models.ExportModels;
+    using static Common.ToastrMessages;
     public class BookController : BaseController
     {
         private readonly IBookService bookService;
@@ -18,8 +19,8 @@ namespace ReviewMuse.Web.Controllers
         public async Task<IActionResult> AllBooks()
         {
             IEnumerable<ExpoAllBooksViewModel> model = await this.bookService.GetAllBooksAsync();
-           
 
+            TempData[SuccessMessage] = "You succesfully opened all books!";
             return View(model);
         }
     }

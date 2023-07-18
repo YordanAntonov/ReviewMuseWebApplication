@@ -7,33 +7,40 @@
 
     <div class="row">
         <div class="col-md-9 d-flex justify-content-center" style="margin-top:60px">
+            @if (!Model.Any())
+            {
+                <h2>No Books have been added yet!</h2>
+            }
+            else
+            {
 
-            <table class="table table-stacked">
-                <thead>
-                    <tr>
-                        <th>Cover</th>
-                        <th>Title</th>
-                        <th>Authors</th>
-                        <th>Total Rating</th>
-                        <th>PublishedDate</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var book in Model)
-                    {
-                        <tr class="bookalike review">
-                            <td><img src="@book.ImageUrl" alt="@book.Title cover photo." width="50" height="82"></td>
-                            <td>@book.Title</td>
-                            @foreach (var name in book.AuthorsNames)
-                            {
-                                <td>@name</td>
-                            }
-                            <td>@book.BookRating <span class="glyphicon glyphicon-star"></span></td>
-                            <td>@book.PublishedDate  <span class="glyphicon glyphicon-calendar"></span></td>
+                <table class="table table-stacked">
+                    <thead>
+                        <tr>
+                            <th>Cover</th>
+                            <th>Title</th>
+                            <th>Authors</th>
+                            <th>Total Rating</th>
+                            <th>PublishedDate</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var book in Model)
+                        {
+                            <tr class="bookalike review">
+                                <td><img src="@book.ImageUrl" alt="@book.Title cover photo." width="50" height="82"></td>
+                                <td>@book.Title</td>
+                                @foreach (var name in book.AuthorsNames)
+                                {
+                                    <td>@name</td>
+                                }
+                                <td>@book.BookRating <span class="glyphicon glyphicon-star"></span></td>
+                                <td>@book.PublishedDate  <span class="glyphicon glyphicon-calendar"></span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
         </div>
     </div>
 </div>
