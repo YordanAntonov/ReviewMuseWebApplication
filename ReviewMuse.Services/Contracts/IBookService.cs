@@ -6,8 +6,6 @@
 
     public interface IBookService
     {
-        Task<IEnumerable<ExpoAllBooksViewModel>> GetAllBooksAsync();
-
         Task<AllBooksSearchEngineModel> AllAsync(ExpoAllBooksQueryViewModel queryModel);
     }
 }

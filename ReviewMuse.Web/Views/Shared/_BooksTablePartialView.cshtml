@@ -11,6 +11,7 @@
     <tbody>
         @foreach (var book in @Model.Books)
         {
+            //Make all of them links towards the book
             <tr class="bookalike review">
                 <td><img src="@book.ImageUrl" alt="@book.Title cover photo." width="50" height="82"></td>
                 <td>@book.Title</td>

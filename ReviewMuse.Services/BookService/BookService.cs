@@ -20,27 +20,6 @@
             this.dbContext = dbContext;
         }
 
-
-        public async Task<IEnumerable<ExpoAllBooksViewModel>> GetAllBooksAsync()
-        {
-            return await this.dbContext
-                .Books
-                .Where(b => b.IsActive)
-                .Select(b => new ExpoAllBooksViewModel()
-                {
-                    BookId = b.Id.ToString(),
-                    Title = b.Title,
-                    AuthorsNames = b.BookAuthors
-                    .Select(a => a.Author.Pseudonim)
-                    .ToArray()!,
-                    ImageUrl = b.ImageUrl,
-                    BookRating = b.TotalRating,
-                    PublishedDate = b.PublishingDate.ToString("dd MMM yyyy")
-                })
-                .OrderBy(b => b.Title)
-                .ToListAsync();
-        }
-
         public async Task<AllBooksSearchEngineModel> AllAsync(ExpoAllBooksQueryViewModel queryModel)
         {
             IQueryable<Book> booksQuery = this.dbContext

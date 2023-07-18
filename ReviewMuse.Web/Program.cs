@@ -5,9 +5,12 @@ namespace ReviewMuse.Web
 
     using ReviewMuse.Data;
     using ReviewMuse.Data.Models;
+
     using ReviewMuse.Services.BookService;
     using ReviewMuse.Services.CategoryService;
     using ReviewMuse.Services.Contracts;
+    using ReviewMuse.Services.EditorService;
+
     using ReviewMuse.Web.Infrastructure.ModelBinders;
 
     public class Program
@@ -49,8 +52,9 @@ namespace ReviewMuse.Web
                 });
 
             //Services
-            builder.Services.AddScoped<IBookService, BookService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<IEditorService, EditorService>();
+            builder.Services.AddScoped<IBookService, BookService>();
 
             var app = builder.Build();
 

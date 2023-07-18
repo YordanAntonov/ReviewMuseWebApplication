@@ -32,5 +32,12 @@
 
             return View(queryModel);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetBookById(string id)
+        {
+            return View();
+        }
     }
 }
