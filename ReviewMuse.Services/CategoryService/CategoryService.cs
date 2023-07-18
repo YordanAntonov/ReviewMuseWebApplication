@@ -17,6 +17,7 @@
             return await this.dbContext
                 .Categories
                 .Select(c => c.CategoryName)
+                .OrderBy(c => c)
                 .ToListAsync();
         }
     }
