@@ -11,6 +11,8 @@
 
         public string? ImageUrl { get; set; }
 
+        public string? BirthDate { get; set; }
+
         public int? BooksCount { get; set; }
     }
 }

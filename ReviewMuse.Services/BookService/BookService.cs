@@ -116,7 +116,8 @@
                         AuthorPseudonim = a.Author.Pseudonim,
                         Description = a.Author.Description,
                         BooksCount = a.Author.AuthorBooks.Count,
-                        ImageUrl = a.Author.ImageUrl
+                        ImageUrl = a.Author.ImageUrl,
+                        BirthDate = a.Author.DateOfBirth.ToString("MMMM dd, yyyy")
                     })
                     .ToList(),
                     PublishingDate = b.PublishingDate.ToString("MMMM dd, yyyy"),
