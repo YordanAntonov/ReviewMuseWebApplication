@@ -90,5 +90,52 @@
                 Books = allBooks
             };
         }
+
+        public async Task<bool> BookExistsById(string id)
+        {
+            return await this.dbContext
+                .Books
+                .AnyAsync(b => b.Id.ToString() == id);
+        }
+
+        public async Task<ExpoSingleBookViewModel> GetBookByIdAsync(string id)
+        {
+            ExpoSingleBookViewModel model = await this.dbContext
+                .Books
+                .Select(b => new ExpoSingleBookViewModel()
+                {
+                    BookId = b.Id.ToString(),
+                    Title = b.Title,
+                    Description = b.Description,
+                    PagesCount = b.NumberOfPages,
+                    ImageUrl = b.ImageUrl!,
+                    AuthorsNames = b.BookAuthors
+                    .Select(a => new ExpoPartialAuthorViewModel()
+                    {
+                        AuthorId = a.AuthorId.ToString(),
+                        AuthorPseudonim = a.Author.Pseudonim,
+                        Description = a.Author.Description,
+                        BooksCount = a.Author.AuthorBooks.Count,
+                        ImageUrl = a.Author.ImageUrl
+                    })
+                    .ToList(),
+                    PublishingDate = b.PublishingDate.ToString("dd MMM yyyy"),
+                    ISBN = b.ISBN,
+                    Language = b.Language.LanguageName,
+                    CoverType = b.BookCover.CoverType,
+                    TotalRating = b.TotalRating,
+                    CategoriesNames = b.BookCategories
+                    .Select(c => new ExpoCategoryViewModel()
+                    {
+                        Id = c.Category.Id,
+                        CategoryName = c.Category.CategoryName,
+                        Description = c.Category.Description
+                    })
+                    .ToList()
+                })
+                .FirstAsync(b => b.BookId == id);
+
+            return model;
+        }
     }
 }

@@ -30,6 +30,6 @@
 
         public string Language { get; set; } = null!;
 
-
+        public string? ImageUrl { get; set; }
     }
 }

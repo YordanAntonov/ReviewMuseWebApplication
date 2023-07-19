@@ -4,7 +4,6 @@
     using Microsoft.AspNetCore.Mvc;
 
     using ReviewMuse.Services.Contracts;
-    using ReviewMuse.Services.Models.Book;
     using ReviewMuse.Web.Models.ExportModels;
 
     using static Common.ToastrMessages;
@@ -13,6 +12,7 @@
     {
         private readonly IBookService bookService;
         private readonly ICategoryService categoryService;
+
         public BookController(IBookService bookService, ICategoryService categoryService)
         {
             this.bookService = bookService;
@@ -37,7 +37,18 @@
         [AllowAnonymous]
         public async Task<IActionResult> GetBookById(string id)
         {
-            return View();
+            bool bookExists = await this.bookService.BookExistsById(id);
+
+            if (!bookExists)
+            {
+                TempData["ErrorMessage"] = "The book you selected does not exist in our library!";
+
+                return RedirectToAction("Book", "AllBooks");
+            }
+
+            ExpoSingleBookViewModel model = await this.bookService.GetBookByIdAsync(id);
+
+            return View(model);
         }
     }
 }

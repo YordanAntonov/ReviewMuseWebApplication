@@ -1,0 +1,22 @@
+﻿@model ExpoSingleBookViewModel
+
+<div class="container-fluid">
+    <h1>Book Details</h1>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-4 sticky">
+            <img src="@Model.ImageUrl" alt="@Model.Title" class="img-fluid">
+        </div>
+        <div class="col-md-8">
+            <h3>@Model.Title</h3>
+            <p><strong>Author:</strong> @foreach (var author in Model.AuthorsNames)
+                {
+                    <p>@author.AuthorPseudonim</p>
+                }
+            <p><strong>Publication Year:</strong> @Model.PublishingDate</p>
+            <p><strong>Description:</strong></p>
+            <p>@Model.Description</p>
+        </div>
+    </div>
+</div>

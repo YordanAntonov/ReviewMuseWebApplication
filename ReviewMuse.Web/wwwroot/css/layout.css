@@ -175,3 +175,8 @@ footer a:hover {
 textarea {
     resize: none;
 }
+
+.sticky {
+    position: sticky;
+    top: 20px;
+}
