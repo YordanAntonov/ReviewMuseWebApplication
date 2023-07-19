@@ -179,4 +179,32 @@ textarea {
 .sticky {
     position: sticky;
     top: 20px;
+    margin-top:29px;
 }
+
+.bookDetails {
+    margin-top:70px
+}
+
+.mainDetails{
+    margin-right:0px;
+    margin-left:0px;
+}
+
+#ReadLess {
+    display: none;
+}
+
+.moreDetails{
+    margin-top:40px;
+}
+
+.authorName {
+    font-family:'Times New Roman', Times, serif
+}
+
+.bookTitle{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color:black
+}
+

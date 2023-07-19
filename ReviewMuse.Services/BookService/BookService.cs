@@ -119,7 +119,7 @@
                         ImageUrl = a.Author.ImageUrl
                     })
                     .ToList(),
-                    PublishingDate = b.PublishingDate.ToString("dd MMM yyyy"),
+                    PublishingDate = b.PublishingDate.ToString("MMMM dd, yyyy"),
                     ISBN = b.ISBN,
                     Language = b.Language.LanguageName,
                     CoverType = b.BookCover.CoverType,

@@ -43,7 +43,7 @@
             {
                 TempData["ErrorMessage"] = "The book you selected does not exist in our library!";
 
-                return RedirectToAction("Book", "AllBooks");
+                return RedirectToAction("AllBooks", "Book");
             }
 
             ExpoSingleBookViewModel model = await this.bookService.GetBookByIdAsync(id);

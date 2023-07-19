@@ -1,22 +1,63 @@
 ﻿@model ExpoSingleBookViewModel
 
-<div class="container-fluid">
-    <h1>Book Details</h1>
-    <hr />
-
-    <div class="row">
-        <div class="col-md-4 sticky">
-            <img src="@Model.ImageUrl" alt="@Model.Title" class="img-fluid">
+<div class="container-fluid bookDetails">
+    <div class="container-fluid row" style="margin-bottom:100px">
+        <div class="col-md-3 sticky bookPhoto">
+            <img src="@Model.ImageUrl" alt="@Model.Title" class="img-fluid" width="250" height="400">
         </div>
-        <div class="col-md-8">
-            <h3>@Model.Title</h3>
-            <p><strong>Author:</strong> @foreach (var author in Model.AuthorsNames)
-                {
-                    <p>@author.AuthorPseudonim</p>
-                }
-            <p><strong>Publication Year:</strong> @Model.PublishingDate</p>
-            <p><strong>Description:</strong></p>
-            <p>@Model.Description</p>
+        <div class="col-md-8 mainDetails">
+            <h1>@Model.Title</h1>
+            @foreach (var author in Model.AuthorsNames)
+            {
+                <p>@author.AuthorPseudonim</p>
+            }
+            
+            <div id="ReadMore" class="row container-fluid " style="margin-right:50px">
+                @Model.Description.Substring(0, 1050);
+            </div>
+
+            <div id="ReadLess" class="row container-fluid " style="margin-right:50px">
+                @Model.Description;
+                <span id="dots">...</span>
+            </div>
+
+            <div>
+                <button onclick="myFunction()" id="myBtn" class="btn">See more</button>
+            </div>
+
+            <div class="row container-fluid moreDetails">
+                <p>
+                    <strong>Ganres:&nbsp;&nbsp;</strong>
+                    @foreach (var ganre in Model.CategoriesNames)
+                    {
+                        <span>@ganre.CategoryName &nbsp;&nbsp;</span>
+                    }
+                </p>
+
+                <p><strong>Book Details:</strong></p>
+                <p>First published: @Model.PublishingDate</p>  
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    function myFunction() {
+        var dots = document.getElementById("dots");
+        var btnText = document.getElementById("myBtn");
+        var ReadMore = document.getElementById("ReadMore");
+        var ReadLess = document.getElementById("ReadLess");
+
+        if (ReadMore.style.display === "none") {
+            dots.style.display = "inline";
+            ReadLess.style.display = "none";
+            btnText.innerHTML = "Read More";
+            ReadMore.style.display = "inline";
+        } else {
+            dots.style.display = "none";
+            ReadMore.style.display = "none";
+            btnText.innerHTML = "Read less";
+            ReadLess.style.display = "inline";
+        }
+    }
+</script>
