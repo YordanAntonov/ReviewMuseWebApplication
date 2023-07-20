@@ -4,6 +4,8 @@
     using ReviewMuse.Data;
 
     using ReviewMuse.Services.Contracts;
+    using ReviewMuse.Web.Models.ExportModels;
+
     public class CategoryService : ICategoryService
     {
         private readonly ReviewMuseDbContext dbContext;
@@ -20,5 +22,6 @@
                 .OrderBy(c => c)
                 .ToListAsync();
         }
+
     }
 }

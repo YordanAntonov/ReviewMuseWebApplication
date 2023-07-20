@@ -6,10 +6,14 @@
             <img src="@Model.ImageUrl" alt="@Model.Title" class="img-fluid" width="250" height="400">
         </div>
         <div class="col-md-8 mainDetails">
+
             <h1 class="bookTitle">@Model.Title</h1>
+
             @foreach (var author in Model.AuthorsNames)
             {
+
                 <h2 class="authorName">@author.AuthorPseudonim</h2>
+
             }
 
             <div id="ReadMore" class="row container-fluid " style="margin-right:50px">
@@ -19,32 +23,46 @@
             <div id="ReadLess" class="row container-fluid " style="margin-right:50px">
                 @Model.Description
                 <span id="dots">...</span>
+
             </div>
 
             <div>
+
                 <button onclick="myFunction()" id="myBtn" class="btn">See more</button>
+
             </div>
 
             <div class="row container-fluid moreDetails panel panel-default">
+
                 <p><strong>Book Details:</strong></p>
+
                 <p>First published @Model.PublishingDate</p>
 
                 <p>
                     <strong>Ganres:&nbsp;&nbsp;</strong>
                     @foreach (var ganre in Model.CategoriesNames)
                     {
+
                         <span>@ganre.CategoryName &nbsp;&nbsp;</span>
+
                     }
                 </p>
 
                 <p><strong>Pages: </strong>@Model.PagesCount</p>
+
                 <p><strong>Cover Type: </strong> @Model.CoverType</p>
+
                 <p><strong>ISBN: </strong> @Model.ISBN</p>
+
                 <p><strong>Language: </strong> @Model.Language</p>
+
             </div>
             <div class="row container-fluid panel panel-default">
+
                 <p><strong>More about the Author:</strong></p>
+
                 <partial name="_AuthorPartialView" model="@Model"></partial>
+
             </div>
         </div>
     </div>
