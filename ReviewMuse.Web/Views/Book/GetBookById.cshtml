@@ -27,6 +27,8 @@
 
             <div class="row container-fluid moreDetails panel panel-default">
                 <p><strong>Book Details:</strong></p>
+                <p>First published @Model.PublishingDate</p>
+
                 <p>
                     <strong>Ganres:&nbsp;&nbsp;</strong>
                     @foreach (var ganre in Model.CategoriesNames)
@@ -35,7 +37,6 @@
                     }
                 </p>
 
-                <p><strong>First published: </strong> @Model.PublishingDate</p>
                 <p><strong>Pages: </strong>@Model.PagesCount</p>
                 <p><strong>Cover Type: </strong> @Model.CoverType</p>
                 <p><strong>ISBN: </strong> @Model.ISBN</p>

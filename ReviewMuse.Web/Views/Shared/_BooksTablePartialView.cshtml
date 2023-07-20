@@ -15,7 +15,7 @@
             <tr class="bookalike review">
                 <td>
                     <a asp-controller="Book" asp-action="GetBookById" asp-route-id="@book.BookId">
-                        <img src="@book.ImageUrl" alt="@book.Title cover photo." width="50" height="82">
+                        <img title="@book.Title" src="@book.ImageUrl" alt="@book.Title cover photo." width="50" height="82">
                     </a>
                 </td>
                 <td>
