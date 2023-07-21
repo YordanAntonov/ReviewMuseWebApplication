@@ -8,6 +8,7 @@
         {
             this.AuthorsNames = new HashSet<ExpoPartialAuthorViewModel>();
             this.CategoriesNames = new HashSet<ExpoCategoryViewModel>();
+            this.BookReviews = new HashSet<ExpoReviewModel>();
             this.UserReview = new ImpoReviewModel();
         }
         public string? BookId { get; set; }
@@ -21,6 +22,8 @@
         public IEnumerable<ExpoPartialAuthorViewModel> AuthorsNames = null!;
 
         public IEnumerable<ExpoCategoryViewModel> CategoriesNames = null!;
+
+        public IEnumerable<ExpoReviewModel> BookReviews = null!;
 
         public string? Description { get; set; }
 

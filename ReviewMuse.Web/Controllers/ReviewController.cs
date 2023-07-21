@@ -29,18 +29,25 @@
                 return RedirectToAction("AllBooks", "Book");
             }
 
+            string id = model.BookId;
+
             if (!ModelState.IsValid)
             {
                 TempData["ErrorMessage"] = "We cannot process your review at the moment. Try again later!";
 
-                return RedirectToAction("GetBookById", "Book", model.BookId);
+                return RedirectToAction("GetBookById", "Book", new { id = id });
             }
 
             string userId = User.GetId();
 
             await this.reviewService.SaveReviewAsync(model, userId);
 
-            return RedirectToAction("GetBookById", "Book", model.BookId);
+            await this.bookService.AddRatingToBookAsync(model.UserReview.Rating, model.BookId!);
+
+            TempData["SuccessMessage"] = "Thank you! You succesfully reviewed our book!";
+
+
+            return RedirectToAction("GetBookById", "Book", new { id = id});
         }
     }
 }

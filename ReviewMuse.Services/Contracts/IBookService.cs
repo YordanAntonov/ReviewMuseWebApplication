@@ -6,6 +6,8 @@
 
     public interface IBookService
     {
+        Task AddRatingToBookAsync(int rating, string bookId);
+
         Task<bool> BookExistsById(string id);
 
         Task<ExpoSingleBookViewModel> GetBookByIdAsync(string id);

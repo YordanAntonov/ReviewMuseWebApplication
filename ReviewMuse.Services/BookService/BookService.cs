@@ -20,6 +20,17 @@
             this.dbContext = dbContext;
         }
 
+        public async Task AddRatingToBookAsync(int rating, string bookId)
+        {
+            Book book = await dbContext
+                .Books
+                .FirstAsync(b => b.Id.ToString() == bookId);
+
+            book.TotalRating += rating;
+
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task<AllBooksSearchEngineModel> AllAsync(ExpoAllBooksQueryViewModel queryModel)
         {
             IQueryable<Book> booksQuery = this.dbContext
@@ -138,5 +149,7 @@
 
             return model;
         }
+
+
     }
 }

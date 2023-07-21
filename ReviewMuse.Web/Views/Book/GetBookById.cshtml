@@ -1,4 +1,9 @@
-﻿@model ExpoSingleBookViewModel
+﻿@using Microsoft.AspNetCore.Identity;
+@using ReviewMuse.Data.Models;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@model ExpoSingleBookViewModel
+
 @{
     ViewData["Title"] = $"{Model.Title} - ReviewMuse";
 }
@@ -54,6 +59,8 @@
                     }
                 </p>
 
+                <p><strong>Total Rating:</strong> @Model.TotalRating <span class="glyphicon glyphicon-star"></span></p>
+
                 <p><strong>Pages: </strong>@Model.PagesCount</p>
 
                 <p><strong>Cover Type: </strong> @Model.CoverType</p>
@@ -70,10 +77,28 @@
                 <partial name="_AuthorPartialView" model="@Model"></partial>
 
             </div>
+            <div class="userLogged">
 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal">
-                Write a Review
-            </button>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal" style="margin-left:380px">
+                        Write a Review
+                    </button>
+                }
+                else
+                {
+                    <h3 class="authorName">Join us in order to write reviews!</h3>
+
+                    <button type="button" class="btn btn-primary">
+                        <a class="text-dark" asp-area="Identity" asp-page="/Account/Register">Sign In</a>
+                    </button>
+
+                    <button type="button" class="btn btn-primary">
+                        <a class="text-dark" asp-area="Identity" asp-page="/Account/Login"> Login</a>
+                    </button>
+
+                }
+            </div>
 
             <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
 
@@ -89,7 +114,7 @@
 
                             </button>
 
-                            <h4 class="modal-title" id="reviewModalLabel">Write a Review</h4>
+                            <h4 class="modal-title" id="reviewModalLabel" style="font-family:'Times New Roman', Times, serif">Review</h4>
 
                         </div>
 
@@ -146,11 +171,16 @@
 
             </div>
 
+            <h3 class="reviewsZone">Reviews:</h3>
+            <partial name="_ReviewViewModel" model="@Model" />
+
         </div>
+
 
     </div>
 
 </div>
+
 
 <script>
     function myFunction() {

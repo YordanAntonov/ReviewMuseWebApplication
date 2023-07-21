@@ -12,12 +12,13 @@
     {
         private readonly IBookService bookService;
         private readonly ICategoryService categoryService;
+        private readonly IReviewService reviewService;
 
-        public BookController(IBookService bookService, ICategoryService categoryService)
+        public BookController(IBookService bookService, ICategoryService categoryService, IReviewService reviewService)
         {
             this.bookService = bookService;
             this.categoryService = categoryService;
-
+            this.reviewService = reviewService;
         }
 
         [HttpGet]
@@ -47,6 +48,13 @@
             }
 
             ExpoSingleBookViewModel model = await this.bookService.GetBookByIdAsync(id);
+
+            bool bookHasReviews = await this.reviewService.BookHasReviewsAsync(model.BookId!);
+
+            if (bookHasReviews)
+            {
+                model.BookReviews = await this.reviewService.GetAllReviewsAsync(model.BookId!);
+            }
 
             return View(model);
         }

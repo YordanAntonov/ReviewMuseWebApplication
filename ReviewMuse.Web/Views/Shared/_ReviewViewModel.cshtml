@@ -1,0 +1,18 @@
+﻿@foreach (var review in Model.BookReviews)
+{
+    <div class="review panel panel-default">
+        <div class="user-info">
+            <span class="username">@review.Username</span>
+            <span class="datetime">@review.DatePublished</span>
+        </div>
+        <div class="rating2">
+            @for (int i = 1; i <= 5; i++)
+            {
+                <span class="star @(review.Rating >= i ? "filled" : "empty")">&#9733;</span>
+            }
+        </div>
+        <div class="comment">
+            @review.Comment
+        </div>
+    </div>
+}
