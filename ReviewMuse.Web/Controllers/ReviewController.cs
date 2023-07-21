@@ -5,7 +5,7 @@
     using ReviewMuse.Web.Infrastructure.Extensions;
     using ReviewMuse.Web.Models.ExportModels;
 
-    public class ReviewController : Controller
+    public class ReviewController : BaseController
     {
         private readonly IReviewService reviewService;
         private readonly IBookService bookService;

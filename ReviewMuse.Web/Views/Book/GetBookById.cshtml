@@ -27,7 +27,7 @@
 
             }
 
-            <p class="bookMetadata">@Model.BookReviews.Count() Reviews, Total Rating: @Model.TotalRating  <span class="glyphicon glyphicon-star"></span></p>
+            <p class="bookMetadata">@Model.BookReviews.Count() Reviews, Total Rating: @Model.TotalRating &nbsp;<span class="glyphicon glyphicon-star"></span></p>
 
             <div id="ReadMore" class="row container-fluid " style="margin-right:50px">
                 @Model.Description.Substring(0, 1050);
@@ -53,11 +53,12 @@
 
                 <p>
                     <strong>Ganres:&nbsp;&nbsp;</strong>
+
                     @foreach (var ganre in Model.CategoriesNames)
                     {
-
-                        <span>@ganre.CategoryName &nbsp;&nbsp;</span>
-
+                        <a asp-controller="Categories" asp-action="GetCategoryById" asp-route-id="@ganre.Id">
+                            <span>@ganre.CategoryName &nbsp;&nbsp;</span>
+                        </a>
                     }
                 </p>
 

@@ -5,5 +5,9 @@
     public interface ICategoryService
     {
         Task<IEnumerable<string>> AllCategoriesAsync();
+
+        Task<ExpoCategoryViewModel> GetCategoryByIdAsync(int id);
+
+        Task<bool> CategoryExistByIdAsync(int id);
     }
 }

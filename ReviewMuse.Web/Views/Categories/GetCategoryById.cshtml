@@ -1,0 +1,33 @@
+﻿@model ExpoCategoryViewModel
+@{
+    ViewData["Title"] = $"{Model.CategoryName} Ganre - ReviewMuse";
+}
+
+
+<div class="category1 container-fluid">
+    <div class="container-fluid ganre1">
+        <h2>@Model.CategoryName</h2>
+        <p>@Model.Description</p>
+        <p class="info1">The following books are from the @Model.CategoryName ganre:</p>
+    </div>
+    @if (!Model.Books.Any())
+    {
+        <p class="noBooks1">No books of @Model.CategoryName ganre have been added yet :(</p>
+    }
+    else
+    {
+        <div class="carousel1">
+            @foreach (var book in Model.Books)
+            {
+                <div class="card1">
+
+                    <p>@string.Join(" ", book.AuthorNames)</p>
+                    <a asp-controller="Book" asp-action="GetBookById" asp-route-id="@book.Id">
+                        <img src="@book.ImageUrl" alt="@book.Title" title="@book.Title">
+                        <h3>@book.Title</h3>
+                    </a>
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -316,3 +316,56 @@ reviewsZone{
 .bookMetadata{
     font-style:italic;
 }
+
+/*
+    Categories view css
+*/
+
+.category1 {
+    margin-top:100px;
+
+}
+
+.ganre1 {
+    margin-bottom:50px;
+}
+
+.ganre1 h2{
+    font-family:'Times New Roman', Times, serif
+}
+
+.info1 {
+    margin-top:10px;
+}
+
+.carousel1 {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none; /* Remove scrollbar for a clean look */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.card1 {
+    flex: 0 0 200px; /* Set the width of each card */
+    margin: 10px;
+    /* Add other styles for the book cards */
+}
+
+.card1 img {
+    width: 150px;
+    height: 230px;
+        /* Add styles for the book image */
+}
+
+    .card1 h3 {
+        font-size: 13px; /* Adjust the font size as needed */
+        font-family: "Arial", sans-serif; /* Replace with your desired font family */
+        color: #333; /* Change the color as per your design */
+        text-align: left; /* Center the title if desired */
+        margin-bottom: 5px;
+    }
+
+.noBooks1 {
+    margin-left:550px;
+    margin-bottom:100px;
+}
