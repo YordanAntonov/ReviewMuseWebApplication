@@ -45,6 +45,7 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+        <partial name="_ValidationScriptsPartial" />
     </div>
 
     <footer class="container-fluid text-center">
@@ -85,7 +86,9 @@
         } // End if
       });
     })
-    </script>   
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

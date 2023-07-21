@@ -1,10 +1,16 @@
 ﻿@model ExpoSingleBookViewModel
+@{
+    ViewData["Title"] = $"{Model.Title} - ReviewMuse";
+}
 
 <div class="container-fluid bookDetails">
+
     <div class="container-fluid row" style="margin-bottom:100px">
+
         <div class="col-md-3 sticky bookPhoto">
             <img src="@Model.ImageUrl" alt="@Model.Title" class="img-fluid" width="250" height="400">
         </div>
+
         <div class="col-md-8 mainDetails">
 
             <h1 class="bookTitle">@Model.Title</h1>
@@ -64,8 +70,86 @@
                 <partial name="_AuthorPartialView" model="@Model"></partial>
 
             </div>
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal">
+                Write a Review
+            </button>
+
+            <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                                <span aria-hidden="true">&times;</span>
+
+                            </button>
+
+                            <h4 class="modal-title" id="reviewModalLabel">Write a Review</h4>
+
+                        </div>
+
+                        <div class="modal-body">
+
+                            <form method="post" asp-controller="Review" asp-action="CreateReivew">
+
+                                <label asp-for="@Model.UserReview.Rating">Rating</label>
+                                <div class="form-group">
+
+                                    <div class="rating panel panel-default">
+                                        <input type="radio" id="star5" name="Rating" value="5" />
+                                        <label for="star5" title="5 stars"></label>
+
+                                        <input type="radio" id="star4" name="Rating" value="4" />
+                                        <label for="star4" title="4 stars"></label>
+
+                                        <input type="radio" id="star3" name="Rating" value="3" />
+                                        <label for="star3" title="3 stars"></label>
+
+                                        <input type="radio" id="star2" name="Rating" value="2" />
+                                        <label for="star2" title="2 stars"></label>
+
+                                        <input type="radio" id="star1" name="Rating" value="1" />
+                                        <label for="star1" title="1 star"></label>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="ratingInput" asp-for="@Model.UserReview.Rating" />
+                                <input type="hidden" name="bookId" value="@Model.BookId" />
+
+                                <div class="form-group">
+
+                                    <label for="reviewText">Write your review here:</label>
+
+                                    <textarea asp-for="@Model.UserReview.Comment" class="form-control" id="reviewText" rows="5"></textarea>
+                                    <span asp-validation-for="@Model.UserReview.Comment" class="text-danger"></span>
+
+                                </div>
+
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                    <button type="submit" class="btn btn-primary">Submit Review</button>
+
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
+
     </div>
+
 </div>
 
 <script>
@@ -88,3 +172,17 @@
         }
     }
 </script>
+
+@section Scripts {
+    <script>
+        const stars = document.querySelectorAll('.rating input[type="radio"]');
+        const ratingInput = document.getElementById('ratingInput');
+
+        stars.forEach(star => star.addEventListener('click', updateRating));
+
+        function updateRating() {
+            const selectedRating = document.querySelector('.rating input[type="radio"]:checked').value;
+            ratingInput.value = selectedRating;
+        }
+    </script>
+}

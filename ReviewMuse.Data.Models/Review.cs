@@ -8,6 +8,7 @@
         public Review()
         {
             this.PostedOn = DateTime.UtcNow;
+            this.IsActive = true;
         }
 
         [Key]

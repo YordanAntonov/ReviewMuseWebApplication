@@ -3,7 +3,7 @@
     public class ExpoPartialAuthorViewModel
     {
         //The nullable types can be used in partial view for "More about the author" partial view!
-        public string AuthorId { get; set; } = null!;
+        public string? AuthorId { get; set; }
 
         public string? AuthorPseudonim { get; set; }
 
