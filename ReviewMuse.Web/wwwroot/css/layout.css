@@ -291,7 +291,6 @@ textarea {
 .review{
     margin-bottom:50px;
     padding:20px;
-    border-block-style:dotted
 }
 
 .userLogged{
@@ -304,3 +303,16 @@ reviewsZone{
     font-display:block
 }
 
+.emptyBooks{
+    margin-top:100px;
+    text-align:center
+}
+
+.reviewBullets{
+    font-weight: bold;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.bookMetadata{
+    font-style:italic;
+}

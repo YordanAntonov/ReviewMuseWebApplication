@@ -27,6 +27,8 @@
 
             }
 
+            <p class="bookMetadata">@Model.BookReviews.Count() Reviews, Total Rating: @Model.TotalRating  <span class="glyphicon glyphicon-star"></span></p>
+
             <div id="ReadMore" class="row container-fluid " style="margin-right:50px">
                 @Model.Description.Substring(0, 1050);
             </div>
@@ -58,8 +60,6 @@
 
                     }
                 </p>
-
-                <p><strong>Total Rating:</strong> @Model.TotalRating <span class="glyphicon glyphicon-star"></span></p>
 
                 <p><strong>Pages: </strong>@Model.PagesCount</p>
 
@@ -153,6 +153,12 @@
                                     <span asp-validation-for="@Model.UserReview.Comment" class="text-danger"></span>
 
                                 </div>
+                                <div class="reviewBullets">
+                                    <p>* Be respectful while writing review.</p>
+                                    <p>* Do not use insulting words in your reviews.</p>
+                                    <p>* Do not use the review section to form arugments again other users.</p>
+                                    <p>* Not following the rules will result in deletion of this review.</p>
+                                </div>
 
                                 <div class="modal-footer">
 
@@ -172,7 +178,14 @@
             </div>
 
             <h3 class="reviewsZone">Reviews:</h3>
-            <partial name="_ReviewViewModel" model="@Model" />
+            @if (!Model.BookReviews.Any())
+            {
+                <p class="emptyBooks">Be the first one to review this book!</p>
+            }
+            else
+            {
+                <partial name="_ReviewViewModel" model="@Model" />
+            }
 
         </div>
 
