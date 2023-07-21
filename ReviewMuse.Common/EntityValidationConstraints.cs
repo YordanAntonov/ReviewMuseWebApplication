@@ -67,7 +67,7 @@
         public static class Review
         {
             public const int ReviewCommentMinLength = 50;
-            public const int ReviewCommentMaxLength = 50000;
+            public const int ReviewCommentMaxLength = 5000;
 
             public const int ReviewRatingMaxRate = 5;
             public const int ReviewRatingMinRate = 1;
