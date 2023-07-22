@@ -89,7 +89,7 @@
                     .Select(a => a.Author.Pseudonim)
                     .ToArray()!,
                     BookRating = b.TotalRating,
-                    PublishedDate = b.PublishingDate.ToString("dd MMM yyyy")
+                    PublishedDate = b.PublishingDate.ToString("dd MMM, yyyy")
                 })
                 .ToArrayAsync();
 

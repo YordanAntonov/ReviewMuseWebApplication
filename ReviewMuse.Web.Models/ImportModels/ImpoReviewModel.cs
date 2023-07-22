@@ -7,7 +7,7 @@
     public class ImpoReviewModel
     {
         [Required]
-        [StringLength(ReviewCommentMaxLength, MinimumLength = ReviewCommentMinLength, ErrorMessage = "The minimum length of the review should be {0} and the maximum length should be {1}.")]
+        [StringLength(ReviewCommentMaxLength, MinimumLength = ReviewCommentMinLength, ErrorMessage = "The minimum length of the review should be {2} and the maximum length should be {1}.")]
         public string Comment { get; set; } = null!;
 
         [Required]

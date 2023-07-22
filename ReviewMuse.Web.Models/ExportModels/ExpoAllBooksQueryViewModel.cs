@@ -28,6 +28,7 @@
 
         public int CurrentPage { get; set; }
 
+        [Display(Name= "Books per page")]
         public int BooksPerPage { get; set; }
 
         public int TotalBooks { get; set; }
