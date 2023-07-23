@@ -106,13 +106,14 @@
         {
             return await this.dbContext
                 .Books
-                .AnyAsync(b => b.Id.ToString() == id);
+                .AnyAsync(b => b.Id.ToString() == id && b.IsActive);
         }
 
         public async Task<ExpoSingleBookViewModel> GetBookByIdAsync(string id)
         {
             ExpoSingleBookViewModel model = await this.dbContext
                 .Books
+                .Where(b => b.IsActive)
                 .Select(b => new ExpoSingleBookViewModel()
                 {
                     BookId = b.Id.ToString(),
