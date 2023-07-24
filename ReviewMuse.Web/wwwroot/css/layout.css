@@ -370,3 +370,86 @@ reviewsZone{
     margin-left:550px;
     margin-bottom:100px;
 }
+
+/*Author view*/
+.container2 {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top:40px;
+    margin-bottom:10px;
+}
+
+.author-info2 {
+    display: flex;
+    align-items: flex-start;
+}
+
+.author-image2 {
+    flex: 0 0 200px;
+    margin-right: 20px;
+}
+
+    .author-image2 img {
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+    }
+
+.author-details2 {
+    flex: 1;
+}
+
+
+.content2 {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main2 {
+    flex: 1;
+    margin-bottom:10px;
+}
+
+.carousel2 {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.book-card2 {
+    flex: 0 0 200px;
+    margin: 10px;
+}
+bookTitle2 {
+    font-size: 13px; /* Adjust the font size as needed */
+    font-family: "Arial", sans-serif; /* Replace with your desired font family */
+    color: #333; /* Change the color as per your design */
+    text-align: left; /* Center the title if desired */
+    margin-bottom: 5px;
+}
+
+    .book-card2 img {
+        width: 150px;
+        height: 230px;
+    }
+
+
+/* Add sticky class styles */
+.sticky2 {
+    position: sticky;
+    top: 20px;
+}
+
+/* Additional styles for author details */
+.author-details2 {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.author-details2 p {
+        margin-bottom: 5px;
+}

@@ -5,6 +5,11 @@
 
     public class AuthorsBooks
     {
+        public AuthorsBooks()
+        {
+            this.IsActive = true;
+        }
+
         [ForeignKey(nameof(Author))]
         public Guid AuthorId { get; set; }
 
@@ -16,5 +21,7 @@
 
         [Required]
         public virtual Book Book { get; set; } = null!;
+
+        public bool IsActive { get; set; }
     }
 }

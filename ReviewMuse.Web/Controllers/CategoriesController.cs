@@ -1,5 +1,6 @@
 ﻿namespace ReviewMuse.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using ReviewMuse.Services.Contracts;
     using ReviewMuse.Web.Models.ExportModels;
@@ -13,6 +14,7 @@
             this.categoryService = categoryService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetCategoryById(int id)
         {

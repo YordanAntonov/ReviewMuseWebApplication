@@ -9,7 +9,7 @@
         public string Title { get; set; } = null!;
         public string? ImageUrl { get; set; }
 
-        public IEnumerable<string> AuthorsNames = null!;
+        public IEnumerable<GetAuthorView> AuthorsNames = null!;
 
         public int BookRating { get; set; }
 

@@ -68,6 +68,9 @@
         [Required]
         public virtual Language Language { get; set; } = null!;
 
+        [MaxLength]
+        public string? AmazonUrl { get; set; }
+
 
         public virtual ICollection<CategoriesBooks> BookCategories { get; set; } = null!;
 

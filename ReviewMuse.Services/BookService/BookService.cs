@@ -86,7 +86,11 @@
                     Title = b.Title,
                     ImageUrl = b.ImageUrl,
                     AuthorsNames = b.BookAuthors
-                    .Select(a => a.Author.Pseudonim)
+                    .Select(a => new GetAuthorView()
+                    {
+                        Id = a.AuthorId.ToString(),
+                        Name = a.Author.Pseudonim
+                    })
                     .ToArray()!,
                     BookRating = b.TotalRating,
                     PublishedDate = b.PublishingDate.ToString("dd MMM, yyyy")

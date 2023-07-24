@@ -1,0 +1,87 @@
+﻿@model ExpoAuthorPageViewModel
+
+<div class="container2 container-fluid">
+    <div class="author-info2">
+        <div class="author-image2 sticky2">
+
+            <img src="@Model.ImageUrl" alt="Author Image" class="img-fluid">
+
+        </div>
+
+        <div class="author-details2">
+
+            <h2>@Model.FullName</h2>
+
+            @if (Model.Pseudonim != null)
+            {
+
+                <p><strong>Pseudonym:</strong> @Model.Pseudonim</p>
+            }
+
+            <p><strong>Date of Birth:</strong> @Model.DateOfBirth</p>
+
+            @if (Model.DateOfDeath != null)
+            {
+                @if (Model.DateOfDeath != "Alive")
+                {
+                    <p><strong>Date of Death:</strong> @Model.DateOfDeath</p>
+                }
+            }
+
+            <p><strong>Place of Birth:</strong> @Model.City, @Model.Country</p>
+
+            @if (Model.Website != null)
+            {
+
+                <p><strong>Website: </strong><a href="@Model.Website">@Model.Website</a></p>
+
+            }
+
+            <p>
+                <strong>Ganres:&nbsp;&nbsp;</strong>
+
+                @foreach (var ganre in Model.Categories)
+                {
+                    <a asp-controller="Categories" asp-action="GetCategoryById" asp-route-id="@ganre.Id">
+                        <span>@ganre.CategoryName &nbsp;&nbsp;</span>
+                    </a>
+                }
+            </p>
+
+            <p><strong>About the Author:</strong></p>
+
+            <p>@Model.Description</p>
+
+            <h3 style="margin-top:100px">Books by @Model.FullName</h3>
+
+            <div class="content2">
+
+                <div class="main2">
+
+                    <div class="carousel2 panel tab-pane">
+                        @if (Model.Books.Any())
+                        {
+                            @foreach (var book in Model.Books)
+                            {
+                                <div class="book-card2">
+                                     <a asp-controller="Book" asp-action="GetBookById" asp-route-id="@book.Id">
+                                        <img src="@book.ImageUrl" alt="@book.Title">
+                                        <p class="bookTitle2">@book.Title</p>
+                                    </a>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p>No books by the author have been added yet!</p>
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

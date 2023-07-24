@@ -6,6 +6,11 @@
 
     public class CategoriesBooks
     {
+        public CategoriesBooks()
+        {
+            this.IsActive = true;
+        }
+
         [ForeignKey(nameof(Book))]
         public Guid BookId { get; set; }
 
@@ -17,5 +22,7 @@
 
         [Required]
         public virtual Category Category { get; set; } = null!;
+
+        public bool IsActive { get; set; }
     }
 }

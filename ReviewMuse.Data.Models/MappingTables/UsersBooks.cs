@@ -6,6 +6,11 @@
 
     public class UsersBooks
     {
+        public UsersBooks()
+        {
+            this.IsActive = true;
+        }
+
         [ForeignKey(nameof(ApplicationUser))]
         public Guid ApplicationUserId { get; set; }
 
@@ -23,5 +28,7 @@
 
         [Required]
         public virtual BookStatus BookStatus { get; set; } = null!;
+
+        public bool IsActive { get; set; }
     }
 }

@@ -4,12 +4,14 @@
         <div class="col-md-6">
             @foreach (var author in @Model.AuthorsNames)
             {
-                <img class="circular-image" src="@author.ImageUrl" alt="@author.AuthorPseudonim" class="img-fluid" width="100" height="150">
-                <p>@author.AuthorPseudonim</p>
+                <a asp-action="GetAuthorById" asp-controller="Author" asp-route-id="@author.AuthorId">
+                    <img class="circular-image img-fluid" src="@author.ImageUrl" alt="@author.AuthorPseudonim" width="100" height="150" title="@author.AuthorPseudonim">
+                    <p>@author.AuthorPseudonim</p>
+                </a>
                 <p><strong>Date of Birth: </strong> @author.BirthDate</p>
                 <p><strong>Number of Books in our website:</strong> @author.BooksCount</p>
                 <p><strong>Short Biography:</strong></p>
-                <p>@author.Description.Substring(0, 241) ...</p>
+                <p>@author.Description.Substring(0, 241)  <a asp-action="GetAuthorById" asp-controller="Author" asp-route-id="@author.AuthorId">...</a></p>
             }
         </div>
 
