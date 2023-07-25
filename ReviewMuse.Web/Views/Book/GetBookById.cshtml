@@ -14,6 +14,21 @@
 
         <div class="col-md-3 sticky bookPhoto">
             <img src="@Model.ImageUrl" alt="@Model.Title" class="img-fluid" width="250" height="400">
+            <form asp-controller="User" asp-action="AddToFavourites" asp-route-id="@Model.BookId" method="post" class="form favForm">
+                <div>
+                    <input type="hidden" asp-for="BookId" />
+                </div>
+                <div>
+                    <select asp-for="BookStatus" style="margin-left:25px">
+                        <option value="3">Want to Read</option>
+                        <option value="1">Reading</option>
+                        <option value="2">Read</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit" class="addToFavButton">Add to Collection</button>
+                </div>
+            </form>
         </div>
 
         <div class="col-md-8 mainDetails">

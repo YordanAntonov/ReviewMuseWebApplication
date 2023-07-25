@@ -1,5 +1,6 @@
 ﻿namespace ReviewMuse.Web.Models.ExportModels
 {
+    using ReviewMuse.Web.Models.Enums;
     using ReviewMuse.Web.Models.ImportModels; 
 
     public class ExpoSingleBookViewModel
@@ -28,6 +29,8 @@
         public string? Description { get; set; }
 
         public int PagesCount { get; set; }
+
+        public BookStatus BookStatus { get; set; }
 
         public string? CoverType { get; set; }
 

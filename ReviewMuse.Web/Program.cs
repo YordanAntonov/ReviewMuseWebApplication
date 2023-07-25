@@ -11,7 +11,7 @@ namespace ReviewMuse.Web
     using ReviewMuse.Services.Contracts;
     using ReviewMuse.Services.EditorService;
     using ReviewMuse.Services.ReviewService;
-
+    using ReviewMuse.Services.UserService;
     using ReviewMuse.Web.Infrastructure.ModelBinders;
 
     public class Program
@@ -58,6 +58,7 @@ namespace ReviewMuse.Web
             builder.Services.AddScoped<IReviewService, ReviewService>();
             builder.Services.AddScoped<IAuthorService, AuthorService>();
             builder.Services.AddScoped<IBookService, BookService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             var app = builder.Build();
 
