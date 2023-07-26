@@ -9,11 +9,13 @@
     {
         private readonly IBookService bookService;
         private readonly IUserService userService;
+        private readonly ICategoryService categoryService;
 
-        public UserController(IBookService bookService, IUserService userService)
+        public UserController(IBookService bookService, IUserService userService, ICategoryService categoryService)
         {
             this.bookService = bookService;
             this.userService = userService;
+            this.categoryService = categoryService;
         }
 
         public async Task<IActionResult> AddToFavourites(ExpoSingleBookViewModel model)
@@ -39,6 +41,19 @@
             TempData["SuccessMessage"] = "Succesfully added this book to your collection!";
 
             return RedirectToAction("GetBookById", "Book", new { id = id });
+        }
+
+        public async Task<IActionResult> MyBooks([FromQuery] ExpoMyBooksCollectionQueryModel queryModel)
+        {
+            string userId = this.User.GetId();
+
+            var serviceModel = await this.userService.MyCollectionAsync(queryModel, userId);
+
+            queryModel.Books = serviceModel.Books;
+            queryModel.TotalBooks = serviceModel.TotalBooksCount;
+            queryModel.Categories = await this.categoryService.AllCategoriesAsync();
+
+            return View(queryModel);
         }
     }
 }

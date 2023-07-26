@@ -1,0 +1,147 @@
+﻿@model ExpoMyBooksCollectionQueryModel
+@{
+    ViewData["Title"] = $"{User.Identity.Name}'s Book Collection - ReviewMuse";
+}
+<h2 class="text-center" style="margin-top:60px">My Favourite Books</h2>
+<hr />
+<form method="get" style="margin-left:0px">
+    <div class="row text-center">
+        <div class="form-group col-md-3 d-flex justify-content-between">
+            <div class="form-group">
+                <label asp-for="Category"></label>
+                <select asp-for="Category" class="form-control">
+                    <option value="">All</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category">@category</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div id="search" class="form-group col-md-3">
+            <label asp-for="SearchQuery"></label>
+            <input asp-for="SearchQuery" class="form-control" placeholder="Enter Title, Author or ISBN">
+        </div>
+        <div class="form-group col-md-3">
+            <div class="form-group">
+                <label asp-for="BookSorting"></label>
+                <select asp-for="BookSorting" class="form-control">
+                    <option value="0">Recent</option>
+                    <option value="1">Oldest</option>
+                    <option value="3">Rating Ascending</option>
+                    <option value="4">Rating Descending</option>
+                    <option value="5">Author</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <div class="form-group">
+                <label asp-for="BooksPerPage"></label>
+                <select asp-for="BooksPerPage" class="form-control">
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="8">8</option>
+                    <option value="11">11</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3" style="margin-left:570px">
+            <div class="form-group mt-4 p-2">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+    var maxPage = Math.Ceiling((double)Model.TotalBooks /
+    Model.BooksPerPage);
+}
+
+@if (!Model.Books.Any())
+{
+    <h2 class="text-center" style="margin-bottom:400px; margin-top:100px">No books found by the given criteria!</h2>
+}
+else
+{
+
+    <div class="container-fluid" style="margin-left:200px; margin-bottom:80px">
+
+        <div class="row container-fluid">
+            <div class="col-md-11 d-flex justify-content-center" style="margin-top:60px">
+                @if (!Model.Books.Any())
+                {
+                    <h2>No Books have been added yet!</h2>
+                }
+                else
+                {
+
+                    <table class="table table-stacked">
+                        <thead>
+                            <tr>
+                                <th>Cover</th>
+                                <th>Title</th>
+                                <th>Authors</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var book in @Model.Books)
+                            {
+                                //Make all of them links towards the book
+                                <tr class="bookalike review">
+                                    <td>
+                                        <a asp-controller="Book" asp-action="GetBookById" asp-route-id="@book.BookId">
+                                            <img title="@book.Title" src="@book.ImageUrl" alt="@book.Title cover photo." width="50" height="82">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="nav-link text-dark" asp-controller="Book" asp-action="GetBookById" asp-route-id="@book.BookId">@book.Title</a>
+                                    </td>
+                                    @foreach (var name in book.AuthorsNames)
+                                    {
+                                        <td><a asp-action="GetAuthorById" asp-controller="Author" asp-route-id="@name.Id">@name.Name</a></td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+<div class="row" style="margin-left:380px; margin-bottom:50px">
+    <div class="col-md-5 d-grid gap-2 d-md-flex justify-content-md-start" style="margin-left:80px">
+        <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+           asp-controller="User"
+           asp-action="MyBooks"
+           asp-route-currentPage="@previousPage"
+           asp-route-category="@Model.Category"
+           asp-route-searchTerm="@Model.SearchQuery"
+           asp-route-sorting="@((int)Model.BookSorting)"><<</a>
+    </div>
+    @{
+        var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
+        !Model.Books.Any();
+    }
+    <div class="col-md-5 d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-primary
+            @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
+           asp-controller="User"
+           asp-action="MyBooks"
+           asp-route-currentPage="@(Model.CurrentPage + 1)"
+           asp-route-category="@Model.Category"
+           asp-route-searchTerm="@Model.SearchQuery"
+           asp-route-sorting="@((int)Model.BookSorting)">>></a>
+    </div>
+</div>
