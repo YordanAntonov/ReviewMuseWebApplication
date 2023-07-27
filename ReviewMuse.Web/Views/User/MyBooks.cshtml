@@ -1,4 +1,10 @@
-﻿@model ExpoMyBooksCollectionQueryModel
+﻿@using Microsoft.AspNetCore.Identity;
+@using ReviewMuse.Data.Models;
+
+@model ExpoMyBooksCollectionQueryModel
+@inject IUserService userService
+@inject UserManager<ApplicationUser> UserManager
+
 @{
     ViewData["Title"] = $"{User.Identity.Name}'s Book Collection - ReviewMuse";
 }
@@ -87,11 +93,13 @@ else
                                 <th>Cover</th>
                                 <th>Title</th>
                                 <th>Authors</th>
+                                <th>Book Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var book in @Model.Books)
                             {
+                                var bookStatus = await this.userService.GetUserBookStatus(UserManager.GetUserId(this.User), book.BookId);
                                 //Make all of them links towards the book
                                 <tr class="bookalike review">
                                     <td>
@@ -106,6 +114,9 @@ else
                                     {
                                         <td><a asp-action="GetAuthorById" asp-controller="Author" asp-route-id="@name.Id">@name.Name</a></td>
                                     }
+                                    <td>
+                                        @bookStatus
+                                    </td>
                                 </tr>
                             }
                         </tbody>
