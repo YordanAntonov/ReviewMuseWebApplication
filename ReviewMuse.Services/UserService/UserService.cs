@@ -9,6 +9,7 @@
     using ReviewMuse.Data.Models.MappingTables;
     using ReviewMuse.Services.Contracts;
     using ReviewMuse.Services.Models.Book;
+    using ReviewMuse.Web.Models.Enums;
     using ReviewMuse.Web.Models.ExportModels;
     using ReviewMuse.Web.Models.ExportModels.Enums;
 
@@ -35,6 +36,15 @@
 
             await this.dbContext.UsersBooks.AddAsync(userBook);
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<Web.Models.Enums.BookStatus> GetUserBookStatus(string userId, string bookId)
+        {
+            var status = await this.dbContext
+                .UsersBooks
+                .FirstAsync(b => b.IsActive && b.ApplicationUserId.ToString() == userId && b.BookId.ToString() == bookId);
+
+            return (Web.Models.Enums.BookStatus)status.BookStatusId;
         }
 
         public async Task<MyCollectionBookEngineModel> MyCollectionAsync(ExpoMyBooksCollectionQueryModel queryModel, string userId)
@@ -116,6 +126,25 @@
                 TotalBooksCount = totalbooks,
                 Books = allBooks
             };
+        }
+
+        public async Task UpdateToCollectionBookAsync(ExpoSingleBookViewModel model, string userId)
+        {
+            int bookStatus = (int)model.BookStatus;
+
+            var userBook = await this.dbContext
+                .UsersBooks
+                .FirstAsync(u => u.IsActive && u.BookId.ToString() == model.BookId && u.ApplicationUserId.ToString() == userId);
+
+            userBook.BookStatusId = bookStatus;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> UserHasBookAsFavouriteAsync(string bookId, string userId)
+        {
+            return await this.dbContext
+                .UsersBooks.AnyAsync(b => b.IsActive && b.BookId.ToString() == bookId && b.ApplicationUserId.ToString() == userId);
         }
     }
 }

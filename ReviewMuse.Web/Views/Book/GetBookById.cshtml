@@ -1,34 +1,72 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @using ReviewMuse.Data.Models;
+@using ReviewMuse.Services.Contracts;
 
 @inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IUserService UserService
+
 @model ExpoSingleBookViewModel
 
 @{
     ViewData["Title"] = $"{Model.Title} - ReviewMuse";
+
+    string bookId = this.Model.BookId!;
+
+    bool hasBookFavourite = await UserService.UserHasBookAsFavouriteAsync(bookId, UserManager.GetUserId(this.User));
+
 }
 
 <div class="container-fluid bookDetails">
 
     <div class="container-fluid row" style="margin-bottom:100px">
-
         <div class="col-md-3 sticky bookPhoto">
             <img src="@Model.ImageUrl" alt="@Model.Title" class="img-fluid" width="250" height="400">
-            <form asp-controller="User" asp-action="AddToFavourites" asp-route-id="@Model.BookId" method="post" class="form favForm">
-                <div>
-                    <input type="hidden" asp-for="BookId" />
-                </div>
-                <div>
-                    <select asp-for="BookStatus" style="margin-left:25px">
-                        <option value="3">Want to Read</option>
-                        <option value="1">Reading</option>
-                        <option value="2">Read</option>
-                    </select>
-                </div>
-                <div>
-                    <button type="submit" class="addToFavButton">Add to Collection</button>
-                </div>
-            </form>
+            @if (SignInManager.IsSignedIn(User))
+            {
+
+
+                if (hasBookFavourite)
+                {
+                    var bookStatus = await this.UserService.GetUserBookStatus(UserManager.GetUserId(this.User), bookId);
+
+                    <form asp-controller="User" asp-action="UpdateFavouriteBook" asp-route-id="@Model.BookId" method="post" class="form favForm">
+                        <div>
+                            <input type="hidden" asp-for="BookId" />
+                        </div>
+                        <div>
+                            <select asp-for="BookStatus" style="margin-left:15px">
+                                <option value="" selected disabled>@bookStatus</option>
+                                <option value="3">Want to Read</option>
+                                <option value="1">Reading</option>
+                                <option value="2">Read</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit" class="addToFavButton">Update status</button>
+                        </div>
+                    </form>
+
+                }
+                else
+                {
+                    <form asp-controller="User" asp-action="AddToFavourites" asp-route-id="@Model.BookId" method="post" class="form favForm">
+                        <div>
+                            <input type="hidden" asp-for="BookId" />
+                        </div>
+                        <div>
+                            <select asp-for="BookStatus" style="margin-left:25px">
+                                <option value="3">Want to Read</option>
+                                <option value="1">Reading</option>
+                                <option value="2">Read</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit" class="addToFavButton">Add to Collection</button>
+                        </div>
+                    </form>
+                }
+            }
         </div>
 
         <div class="col-md-8 mainDetails">
