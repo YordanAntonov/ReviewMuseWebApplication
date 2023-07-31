@@ -12,6 +12,7 @@
 
             this.AuthorBooks = new HashSet<AuthorsBooks>();
             this.AuthorCategories = new HashSet<CategoriesAuthors>();
+            this.IsActive = true;
         }
 
         [Key]

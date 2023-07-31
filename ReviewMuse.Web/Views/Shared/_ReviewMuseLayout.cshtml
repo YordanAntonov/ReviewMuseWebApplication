@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using ReviewMuse.Data.Models
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>@ViewData["Title"]</title>
@@ -36,9 +38,18 @@
                     <li><a asp-controller="Book" asp-action="AllBooks">All Books</a></li>
                     @if (User.Identity.IsAuthenticated!)
                     {
+                        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                        bool userIsEditor = await this.editorService.IsUserEditorById(Guid.Parse(userIdClaim!));
+
                         <li><a asp-controller="User" asp-action="MyBooks">My Collection</a></li>
+
+                        @if (userIsEditor)
+                        {
+                            <li><a asp-controller="Author" asp-action="GetAuthorsForAddingBook">Add New Book <span title="Editor Profile" class="glyphicon glyphicon-pencil"></span></a></li>
+                        }
+
                     }
-                    <li><a asp-controller="Book" asp-fragment="search"><span class="glyphicon glyphicon-search"></span></a></li>
+
                 </ul>
                 <partial name="_LoginPartial" />
             </div>

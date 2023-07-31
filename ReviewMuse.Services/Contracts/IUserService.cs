@@ -14,5 +14,7 @@
         Task UpdateToCollectionBookAsync(ExpoSingleBookViewModel model, string userId);
 
         Task<Web.Models.Enums.BookStatus> GetUserBookStatus(string userId, string bookId);
+
+        Task RemoveFromFavouritesAsync(string bookId, string userId);
     }
 }

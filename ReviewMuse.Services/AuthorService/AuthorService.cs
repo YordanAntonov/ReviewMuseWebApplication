@@ -3,9 +3,11 @@
     using Microsoft.EntityFrameworkCore;
 
     using ReviewMuse.Data;
+    using ReviewMuse.Data.Models;
+    using ReviewMuse.Data.Models.MappingTables;
     using ReviewMuse.Services.Contracts;
     using ReviewMuse.Web.Models.ExportModels;
-
+    using ReviewMuse.Web.Models.ImportModels;
 
     public class AuthorService : IAuthorService
     {
@@ -13,6 +15,38 @@
         public AuthorService(ReviewMuseDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task AddAuthorAsync(ImpoNewAuthorViewModel model)
+        {
+            Author author = new Author()
+            {
+                FullName = model.FullName,
+                Description = model.Description,
+                DateOfBirth = DateTime.Parse(model.DateOfBirth),
+                DateOfDeath = model.DateOfDeath != null ? DateTime.Parse(model.DateOfDeath) : null,
+                Pseudonim = model.Pseudonim != null ? model.Pseudonim : null,
+                Website = model.Website != null ? model.Website : null,
+                ImageUrl = model.ImageUrl != null ? model.ImageUrl : null,
+                City = model.CityName,
+                Country = model.CountryName
+            };
+
+            CategoriesAuthors categoriesAuthors;
+
+            foreach (var category in model.GanresId)
+            {
+                categoriesAuthors = new CategoriesAuthors()
+                {
+                    CategoryId = category,
+                    AuthorId = author.Id,
+                };
+
+                await this.dbContext.CategoriesAuthors.AddAsync(categoriesAuthors);
+            }
+
+            await this.dbContext.Authors.AddAsync(author);
+            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<bool> AuthorExistByIdAsync(string id)
@@ -72,6 +106,7 @@
                     AuthorName = a.FullName,
                     ImageUrl = a.ImageUrl!
                 })
+                .OrderBy(a => a.AuthorName)
                 .ToListAsync();
 
             return model;

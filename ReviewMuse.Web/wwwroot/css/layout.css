@@ -498,3 +498,12 @@ bookTitle2 {
     text-align:center;
     margin-top:100px;   
 }
+
+.addAuthorBtn {
+    margin-left:265px;
+    background-color:green
+}
+.addAuthorContainer {
+    margin-top:50px;
+    margin-bottom:100px;
+}

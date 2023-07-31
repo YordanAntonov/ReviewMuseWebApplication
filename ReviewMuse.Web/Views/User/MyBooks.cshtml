@@ -94,6 +94,7 @@ else
                                 <th>Title</th>
                                 <th>Authors</th>
                                 <th>Book Status</th>
+                                <th>Remove</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,6 +117,9 @@ else
                                     }
                                     <td>
                                         @bookStatus
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success" asp-controller="User" asp-action="RemoveFromFavourites" asp-route-id="@book.BookId">Remove</a>
                                     </td>
                                 </tr>
                             }

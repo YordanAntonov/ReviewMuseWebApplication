@@ -75,5 +75,25 @@
 
             return View(queryModel);
         }
+
+        public async Task<IActionResult> RemoveFromFavourites(string id)
+        {
+            bool idIsValid = await this.bookService.BookExistsById(id);
+
+            if (!idIsValid)
+            {
+                TempData["ErrorMessage"] = "Selected Book does not exist!";
+
+                return RedirectToAction("MyBooks", "User");
+            }
+
+            string userId = this.User.GetId();
+
+            await this.userService.RemoveFromFavouritesAsync(id, userId);
+
+            TempData["InfoMessage"] = "Book removed from your Library!";
+
+            return RedirectToAction("MyBooks", "User");
+        }
     }
 }

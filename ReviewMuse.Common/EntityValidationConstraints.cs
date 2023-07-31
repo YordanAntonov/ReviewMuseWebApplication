@@ -53,6 +53,7 @@
             public const int NameMinLength = 1;
 
             public const int DescriptionMinLength = 50;
+            public const int DescriptionMaxLength = 50000;
 
             public const int CityNameMaxLength = 300;
             public const int CityNameMinLength = 2;

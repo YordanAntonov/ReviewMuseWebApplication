@@ -2,5 +2,10 @@
 @using ReviewMuse.Web.Models
 @using ReviewMuse.Web.Models.Enums
 @using ReviewMuse.Web.Models.ExportModels
+@using ReviewMuse.Web.Models.ImportModels
 @using ReviewMuse.Services.Contracts;
+@using System.Security.Claims;
+
+@inject IEditorService editorService
+
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

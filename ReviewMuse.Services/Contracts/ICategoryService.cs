@@ -1,6 +1,7 @@
 ﻿namespace ReviewMuse.Services.Contracts
 {
     using ReviewMuse.Web.Models.ExportModels;
+    using ReviewMuse.Web.Models.ImportModels;
     using System.Collections.Generic;
     public interface ICategoryService
     {
@@ -9,5 +10,7 @@
         Task<ExpoCategoryViewModel> GetCategoryByIdAsync(int id);
 
         Task<bool> CategoryExistByIdAsync(int id);
+
+        Task<IEnumerable<ImpoCategoriesForBookAndAuthorViewModel>> GetCategoriesAsync();
     }
 }

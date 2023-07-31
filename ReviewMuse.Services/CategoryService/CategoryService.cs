@@ -5,6 +5,7 @@
 
     using ReviewMuse.Services.Contracts;
     using ReviewMuse.Web.Models.ExportModels;
+    using ReviewMuse.Web.Models.ImportModels;
 
     public class CategoryService : ICategoryService
     {
@@ -52,6 +53,19 @@
                     .ToArray()
                 })
                 .FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<IEnumerable<ImpoCategoriesForBookAndAuthorViewModel>> GetCategoriesAsync()
+        {
+            return await this.dbContext
+                .Categories
+                .Select(c => new ImpoCategoriesForBookAndAuthorViewModel()
+                {
+                    Id = c.Id,
+                    CategoryName = c.CategoryName
+                })
+                .OrderBy(c => c.CategoryName)
+                .ToArrayAsync();
         }
 
     }

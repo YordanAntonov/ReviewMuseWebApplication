@@ -128,6 +128,18 @@
             };
         }
 
+        public async Task RemoveFromFavouritesAsync(string bookId, string userId)
+        {
+            UsersBooks userBook = await this.dbContext
+                .UsersBooks
+                .FirstAsync(b => b.BookId.ToString() == bookId && b.ApplicationUserId.ToString() == userId);
+
+
+            this.dbContext.Remove(userBook);
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task UpdateToCollectionBookAsync(ExpoSingleBookViewModel model, string userId)
         {
             int bookStatus = (int)model.BookStatus;
