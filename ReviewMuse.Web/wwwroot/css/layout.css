@@ -480,3 +480,21 @@ bookTitle2 {
     margin-top:20px;
     margin-left:40px;
 }
+
+/*
+    Authors For Adding book style
+*/
+.author-img2 {
+    max-width: 300px;
+    height: 200px;
+}
+
+.cardAuthor {
+    height: 100%;
+    margin-bottom:50px;
+}
+
+.authorsHeader1 {
+    text-align:center;
+    margin-top:100px;   
+}

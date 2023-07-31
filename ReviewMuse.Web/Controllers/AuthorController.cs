@@ -35,5 +35,14 @@
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAuthorsForAddingBook()
+        {
+            IEnumerable<ExpoAuthorForAddingNewBookView> model = await this.authorService
+                .GetAuthorForAddingBookAsync();
+
+            return View(model);
+        }
+
     }
 }

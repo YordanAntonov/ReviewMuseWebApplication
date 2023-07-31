@@ -60,5 +60,21 @@
 
             return model;
         }
+
+        public async Task<IEnumerable<ExpoAuthorForAddingNewBookView>> GetAuthorForAddingBookAsync()
+        {
+            IEnumerable<ExpoAuthorForAddingNewBookView> model = await this.dbContext
+                .Authors
+                .Where(a => a.IsActive)
+                .Select(a => new ExpoAuthorForAddingNewBookView()
+                {
+                    AuthorId = a.Id.ToString(),
+                    AuthorName = a.FullName,
+                    ImageUrl = a.ImageUrl!
+                })
+                .ToListAsync();
+
+            return model;
+        }
     }
 }

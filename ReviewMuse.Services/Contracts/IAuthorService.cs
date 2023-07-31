@@ -6,5 +6,7 @@
         Task<ExpoAuthorPageViewModel> GetAuthorByIdAsync(string id);
 
         Task<bool> AuthorExistByIdAsync(string id);
+
+        Task<IEnumerable<ExpoAuthorForAddingNewBookView>> GetAuthorForAddingBookAsync();
     }
 }
