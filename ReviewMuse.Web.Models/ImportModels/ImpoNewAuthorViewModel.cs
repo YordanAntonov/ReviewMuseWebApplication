@@ -23,8 +23,10 @@
         public string Description { get; set; } = null!;
 
         [Required]
+        [RegularExpression(@"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\d|3[0-1])$", ErrorMessage = "Invalid date format. Use 'yyyy-MM-dd' format.")]
         public string DateOfBirth { get; set; } = null!;
 
+        [RegularExpression(@"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\d|3[0-1])$", ErrorMessage = "Invalid date format. Use yyyy-MM-dd.")]
         public string? DateOfDeath { get; set; }
 
         [Display(Name = "Website of the author")]
@@ -34,12 +36,12 @@
         public string? ImageUrl { get; set; }
 
         [Required]
-        [StringLength(CityNameMaxLength, MinimumLength = CityNameMinLength)]
+        [StringLength(CityNameMaxLength, MinimumLength = CityNameMinLength, ErrorMessage = "City Name is Required!")]
         [Display(Name = "City Name")]
         public string CityName { get; set; } = null!;
 
         [Required]
-        [StringLength(CountryNameMaxLength, MinimumLength = CountryNameMinLength)]
+        [StringLength(CountryNameMaxLength, MinimumLength = CountryNameMinLength, ErrorMessage = "Country Name is Required!")]
         [Display(Name = "Country Name")]
         public string CountryName { get; set; } = null!;
 

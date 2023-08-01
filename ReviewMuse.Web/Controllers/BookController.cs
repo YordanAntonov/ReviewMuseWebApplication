@@ -5,7 +5,7 @@
 
     using ReviewMuse.Services.Contracts;
     using ReviewMuse.Web.Models.ExportModels;
-
+    using ReviewMuse.Web.Models.ImportModels;
     using static Common.ToastrMessages;
 
     public class BookController : BaseController
@@ -58,5 +58,18 @@
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddBook()
+        {
+            ImpoNewBookViewModel model = new ImpoNewBookViewModel();
+
+            model.BookCovers = await this.bookService.GetBookCoversAsync();
+            model.Languages = await this.bookService.GetBookLanguagesAsync();
+            model.Ganres = await this.categoryService.GetCategoriesAsync();
+
+            return View(model);
+        }
     }
 }
+

@@ -28,6 +28,7 @@
             public const int TitleMinLength = 1;
 
             public const int DescriptionMinLength = 40;
+            public const int DescriptionMaxLength = 50000;
 
             public const int PagesCountMax = 10000;
             public const int PagesCountMin = 1;

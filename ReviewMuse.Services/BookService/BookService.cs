@@ -10,7 +10,7 @@
 
     using ReviewMuse.Web.Models.ExportModels;
     using ReviewMuse.Web.Models.ExportModels.Enums;
-
+    using ReviewMuse.Web.Models.ImportModels;
 
     public class BookService : IBookService
     {
@@ -155,6 +155,34 @@
             return model;
         }
 
+        public async Task<IEnumerable<ImpoCoverTypeViewModel>> GetBookCoversAsync()
+        {
+            IEnumerable<ImpoCoverTypeViewModel> model = await this.dbContext
+                .BookCovers
+                .Select(bc => new ImpoCoverTypeViewModel()
+                {
+                    CoverId = bc.Id,
+                    CoverName = bc.CoverType
+                })
+                .OrderBy(bc => bc.CoverName)
+                .ToListAsync();
 
+            return model;
+        }
+
+        public async Task<IEnumerable<ImpoLanguageViewModel>> GetBookLanguagesAsync()
+        {
+            IEnumerable<ImpoLanguageViewModel> model = await this.dbContext
+               .Languages
+               .Select(l => new ImpoLanguageViewModel()
+               {
+                   LanguageId = l.Id,
+                   LanguageName = l.LanguageName
+               })
+               .OrderBy(l => l.LanguageName)
+               .ToListAsync();
+
+            return model;
+        }
     }
 }

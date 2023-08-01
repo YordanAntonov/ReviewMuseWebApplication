@@ -507,3 +507,23 @@ bookTitle2 {
     margin-top:50px;
     margin-bottom:100px;
 }
+
+.authorNotif{
+    font-size:15px;
+    font-style:italic;
+    color:red
+}
+
+/*
+    Books For Adding book style
+*/
+
+.addBookContainer{
+    margin-top:50px;
+    text-align:center;
+    margin-bottom:80px;
+}
+
+.addBookContainer button{
+    margin-top:50px;
+}

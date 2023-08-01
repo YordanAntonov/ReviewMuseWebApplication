@@ -3,6 +3,7 @@
     using ReviewMuse.Services.Models.Book;
 
     using ReviewMuse.Web.Models.ExportModels;
+    using ReviewMuse.Web.Models.ImportModels;
 
     public interface IBookService
     {
@@ -14,6 +15,9 @@
 
         Task<AllBooksSearchEngineModel> AllAsync(ExpoAllBooksQueryViewModel queryModel);
 
+        Task<IEnumerable<ImpoCoverTypeViewModel>> GetBookCoversAsync();
+
+        Task<IEnumerable<ImpoLanguageViewModel>> GetBookLanguagesAsync();
 
     }
 }
