@@ -12,6 +12,7 @@
         {
             this.Id = Guid.NewGuid();
             this.RecordCreatedOn = DateTime.UtcNow;
+            this.IsActive = true;
 
             this.BookCategories = new HashSet<CategoriesBooks>();
             this.BookAuthors = new HashSet<AuthorsBooks>();

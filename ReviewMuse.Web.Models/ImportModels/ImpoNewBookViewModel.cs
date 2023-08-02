@@ -19,7 +19,7 @@
         public string Title { get; set; } = null!;
 
         [Required]
-        [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength]
+        [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength)]
         [Display(Name = "Short Description")]
         public string Description { get; set; } = null!;
 

@@ -12,5 +12,7 @@
         Task<bool> CategoryExistByIdAsync(int id);
 
         Task<IEnumerable<ImpoCategoriesForBookAndAuthorViewModel>> GetCategoriesAsync();
+
+        Task AddCategoryAsync(ImpoNewCategoryViewModel model);
     }
 }

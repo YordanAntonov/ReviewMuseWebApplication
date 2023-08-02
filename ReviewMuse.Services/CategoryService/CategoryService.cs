@@ -2,7 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using ReviewMuse.Data;
-
+    using ReviewMuse.Data.Models;
     using ReviewMuse.Services.Contracts;
     using ReviewMuse.Web.Models.ExportModels;
     using ReviewMuse.Web.Models.ImportModels;
@@ -68,6 +68,17 @@
                 .ToArrayAsync();
         }
 
+        public async Task AddCategoryAsync(ImpoNewCategoryViewModel model)
+        {
+            Category category = new Category()
+            {
+                CategoryName = model.CategoryName,
+                Description = model.Description
+            };
+
+            await this.dbContext.Categories.AddAsync(category);
+            await this.dbContext.SaveChangesAsync();
+        }
     }
 
 }

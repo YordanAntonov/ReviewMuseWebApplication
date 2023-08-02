@@ -527,3 +527,36 @@ bookTitle2 {
 .addBookContainer button{
     margin-top:50px;
 }
+
+/*
+    AddLanguage form
+*/
+.addLanguageForm{
+    margin-top:100px;
+    margin-bottom:400px;
+    margin-left:500px;
+}
+
+.addLanguageForm form{
+    margin-top:100px
+}
+
+.addLanguageForm button{
+    margin-top:27px;
+    margin-left: 30px;
+}
+
+.addGanreForm {
+    margin-top: 100px;
+    margin-bottom: 400px;
+    margin-left: 120px;
+}
+
+.addGanreForm form {
+    margin-top: 100px
+}
+
+.addGanreForm button {
+    margin-top: 33px;
+    margin-left: 30px;
+}

@@ -7,6 +7,7 @@
 
     public interface IBookService
     {
+        Task AddBook(ImpoNewBookViewModel model, string editorId);
         Task AddRatingToBookAsync(int rating, string bookId);
 
         Task<bool> BookExistsById(string id);
@@ -18,6 +19,7 @@
         Task<IEnumerable<ImpoCoverTypeViewModel>> GetBookCoversAsync();
 
         Task<IEnumerable<ImpoLanguageViewModel>> GetBookLanguagesAsync();
+
 
     }
 }

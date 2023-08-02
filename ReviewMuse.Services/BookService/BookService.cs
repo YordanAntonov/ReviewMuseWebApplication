@@ -4,7 +4,7 @@
 
     using ReviewMuse.Data;
     using ReviewMuse.Data.Models;
-
+    using ReviewMuse.Data.Models.MappingTables;
     using ReviewMuse.Services.Contracts;
     using ReviewMuse.Services.Models.Book;
 
@@ -18,6 +18,48 @@
         public BookService(ReviewMuseDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task AddBook(ImpoNewBookViewModel model, string editorId)
+        {
+            Book book = new Book()
+            {
+                Title = model.Title,
+                Description = model.Description,
+                PublishingDate = DateTime.Parse(model.PublishingDate),
+                ImageUrl = model.ImageUrl != null ? model.ImageUrl : null,
+                NumberOfPages = model.NumberOfPages,
+                ISBN = model.ISBN,
+                AmazonUrl = model.AmazonLink != null ? model.AmazonLink : null,
+                LanguageId = model.LanguageId,
+                BookCoverId = model.CoverId,
+                EditorId = Guid.Parse(editorId)
+            };
+
+            CategoriesBooks categoriesBooks;
+
+            foreach (var category in model.GanresId)
+            {
+                categoriesBooks = new CategoriesBooks()
+                {
+                    CategoryId = category,
+                    Book = book
+                };
+
+                await this.dbContext.CategoriesBooks.AddAsync(categoriesBooks);
+            }
+
+            AuthorsBooks authorBooks = new AuthorsBooks()
+            {
+                AuthorId = Guid.Parse(model.AuthorId),
+                Book = book
+            };
+
+            await this.dbContext.AuthorsBooks.AddAsync(authorBooks);
+
+            await this.dbContext.Books.AddAsync(book);
+            await this.dbContext.SaveChangesAsync();
+
         }
 
         public async Task AddRatingToBookAsync(int rating, string bookId)

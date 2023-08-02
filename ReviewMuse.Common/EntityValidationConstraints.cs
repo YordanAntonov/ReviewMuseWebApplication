@@ -7,6 +7,7 @@
             public const int NameMaxLength = 70;
             public const int NameMinLength = 1;
 
+            public const int DescriptionMaxLength = 50000;
             public const int DescriptionMinLength = 50;
         }
 
@@ -27,7 +28,7 @@
             public const int TitleMaxLength = 150;
             public const int TitleMinLength = 1;
 
-            public const int DescriptionMinLength = 40;
+            public const int DescriptionMinLength = 1050;
             public const int DescriptionMaxLength = 50000;
 
             public const int PagesCountMax = 10000;

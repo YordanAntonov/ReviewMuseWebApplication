@@ -12,18 +12,20 @@
         <div class="row">
             @foreach (var author in Model)
             {
-                <div class="col-md-4 mb-4">
-                    <div class="cardAuthor">
-                        <img class="card-img-top author-img2" src="@author.ImageUrl" alt="Author Image">
-                        <div class="card-body">
-                            <h5 class="card-title">@author.AuthorName</h5>
+                <a asp-controller="Editor" asp-action="AddBook" asp-route-id="@author.AuthorId">
+                    <div class="col-md-4 mb-4">
+                        <div class="cardAuthor">
+                            <img class="card-img-top author-img2" src="@author.ImageUrl" alt="Author Image">
+                            <div class="card-body">
+                                <h5 class="card-title">@author.AuthorName</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             }
         </div>
         <div class="container">
-            <a class="btn btn-success addAuthorBtn" asp-controller="Author" asp-action="AddAuthor">Add New Author</a>
+            <a class="btn btn-success addAuthorBtn" asp-controller="Editor" asp-action="AddAuthor">Add New Author</a>
         </div>
     </div>
 </div>
