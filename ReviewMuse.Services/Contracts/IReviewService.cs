@@ -8,5 +8,9 @@
         Task<IEnumerable<ExpoReviewModel>> GetAllReviewsAsync(string bookId);
 
         Task<bool> BookHasReviewsAsync(string bookId);
+
+        Task RemoveReviewAsync(string id);
+
+        Task<bool> ReviewExistByIdAsync(string id);
     }
 }

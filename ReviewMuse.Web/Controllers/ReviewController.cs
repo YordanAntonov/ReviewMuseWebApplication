@@ -9,12 +9,13 @@
     {
         private readonly IReviewService reviewService;
         private readonly IBookService bookService;
+        private readonly IEditorService editorService;
 
-        public ReviewController(IReviewService reviewService, IBookService bookService)
+        public ReviewController(IReviewService reviewService, IBookService bookService, IEditorService editorService)
         {
             this.reviewService = reviewService;
             this.bookService = bookService;
-
+            this.editorService = editorService;
         }
 
         [HttpPost]
@@ -48,6 +49,32 @@
 
 
             return RedirectToAction("GetBookById", "Book", new { id = id});
+        }
+
+        public async Task<IActionResult> RemoveReview(string id)
+        {
+            bool reviewExist = await this.reviewService.ReviewExistByIdAsync(id);
+
+            if (!reviewExist)
+            {
+                TempData["ErrorMessage"] = "The review you selected does not exist";
+
+                return RedirectToAction("AllBooks", "Book");
+            }
+
+            bool userIsEditor = await this.editorService.IsUserEditorById(Guid.Parse(User.GetId()));
+
+            if (!userIsEditor)
+            {
+                TempData["ErrorMessage"] = "Access Denied! You must be an editor in order to access this page!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            TempData["SuccessMessage"] = "Successfully removed Review!";
+            await this.reviewService.RemoveReviewAsync(id);
+
+            return RedirectToAction("AllBooks", "Book");
         }
     }
 }

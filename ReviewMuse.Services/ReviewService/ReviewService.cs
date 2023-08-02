@@ -26,10 +26,11 @@
         {
             IEnumerable<ExpoReviewModel> reviews = await dbContext
                 .Reviews
-                .Where(b => b.BookId.ToString() == bookId)
+                .Where(b => b.BookId.ToString() == bookId && b.IsActive)
                 .OrderByDescending(r => r.PostedOn)
                 .Select(r => new ExpoReviewModel()
                 {
+                    Id = r.Id.ToString(),
                     Rating = r.Rating,
                     Comment = r.Comment,
                     DatePublished = r.PostedOn.ToString("dd MMM yyyy"),
@@ -38,6 +39,24 @@
                 .ToListAsync();
 
             return reviews;
+        }
+
+        public async Task RemoveReviewAsync(string id)
+        {
+            Review review = await this.dbContext
+                .Reviews
+                .FirstAsync(r => r.Id.ToString() == id);
+
+            review.IsActive = false;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> ReviewExistByIdAsync(string id)
+        {
+            return await this.dbContext
+                .Reviews
+                .AnyAsync(r => r.Id.ToString() == id);
         }
 
         public async Task SaveReviewAsync(ExpoSingleBookViewModel model, string userId)

@@ -1,4 +1,12 @@
-﻿@foreach (var review in Model.BookReviews)
+﻿@using Microsoft.AspNetCore.Identity;
+@using ReviewMuse.Data.Models;
+@using ReviewMuse.Services.Contracts;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IEditorService editorService
+
+@foreach (var review in Model.BookReviews)
 {
     <div class="review panel panel-default">
         <div class="user-info">
@@ -11,8 +19,26 @@
                 <span class="star @(review.Rating >= i ? "filled" : "empty")">&#9733;</span>
             }
         </div>
+        @if (await editorService.IsUserEditorById(Guid.Parse(UserManager.GetUserId(this.User))))
+        {
+            <div class="delete-review">
+                <a asp-controller="Review" asp-action="RemoveReview" asp-route-id="@review.Id" onclick="return confirmDelete();"><span class="glyphicon glyphicon-trash"></span></a>
+            </div>
+        }
         <div class="comment">
             @review.Comment
         </div>
     </div>
 }
+
+<script>
+    function confirmDelete() {
+        if (confirm("Confirm that you are sure you want to remove this Review?")) {
+            // If the user clicks OK, proceed with the deletion
+            return true;
+        } else {
+            // If the user clicks Cancel, do not proceed with the deletion
+            return false;
+        }
+    }
+</script>
