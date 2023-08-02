@@ -190,7 +190,8 @@
                         CategoryName = c.Category.CategoryName,
                         Description = c.Category.Description
                     })
-                    .ToList()
+                    .ToList(),
+                    AmazonLink = b.AmazonUrl
                 })
                 .FirstAsync(b => b.BookId == id);
 

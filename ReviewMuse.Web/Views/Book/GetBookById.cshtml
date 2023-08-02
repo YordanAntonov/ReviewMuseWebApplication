@@ -67,6 +67,14 @@
                     </form>
                 }
             }
+            <div class="amazonBtn">
+                @if (Model.AmazonLink != null)
+                {
+                    <a href="@Model.AmazonLink" target="_blank" class="btn btn-warning">
+                        <img src="~/amazon-logo.png" alt="Amazon" class="amazon-logo"> Buy on Amazon
+                    </a>
+                }
+            </div>
         </div>
 
         <div class="col-md-8 mainDetails">

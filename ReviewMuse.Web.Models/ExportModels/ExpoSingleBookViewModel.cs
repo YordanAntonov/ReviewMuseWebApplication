@@ -40,5 +40,6 @@
         public string? Language { get; set; }
 
         public string? ImageUrl { get; set; }
+        public string? AmazonLink { get; set; }
     }
 }

@@ -560,3 +560,14 @@ bookTitle2 {
     margin-top: 33px;
     margin-left: 30px;
 }
+
+
+.amazon-logo{
+    width:20px;
+    height:20px;
+}
+
+.amazonBtn{
+    margin-top:10px;
+    margin-left:40px
+}
