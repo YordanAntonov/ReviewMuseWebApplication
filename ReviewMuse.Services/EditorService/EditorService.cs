@@ -38,6 +38,19 @@
             await this.dbContext.SaveChangesAsync();
         }
 
+        public async Task BecomeEditorAsync(ImpoNewEditorViewModel model)
+        {
+            Editor editor = new Editor()
+            {
+                UserId = Guid.Parse(model.UserId!),
+                PhoneNumber = model.PhoneNumber,
+                DateOfBirth = DateTime.Parse(model.DateOfBirth)
+            };
+
+            await this.dbContext.Editors.AddAsync(editor);
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task EditAuthorAsync(ImpoNewAuthorViewModel model)
         {
             Author author = await this.dbContext

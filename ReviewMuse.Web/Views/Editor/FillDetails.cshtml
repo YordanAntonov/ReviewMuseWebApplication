@@ -1,0 +1,34 @@
+﻿@model ImpoNewEditorViewModel
+
+@{
+    ViewData["Title"] = "Become Editor - ReviewMuse";
+}
+
+<div class="container-fluid fillInBody">
+
+    <h2>Fill in your details, in order to be added as an editor!</h2>
+    <form method="post">
+        <label asp-for="PhoneNumber">Phone Number:</label>
+        <input asp-for="PhoneNumber" class="form-control">
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+        <label asp-for="DateOfBirth">Date of Birth:</label>
+        <input asp-for ="DateOfBirth" class="form-control">
+        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p>
+        * Be respectful with the users of the application!
+    </p>
+
+    <p>
+        * Follow the guideline and remove only reviews which are not appropriate!
+    </p>
+
+    <p>
+        * When adding new books or Authors be try to be as precise as possible!
+    </p>
+
+</div>

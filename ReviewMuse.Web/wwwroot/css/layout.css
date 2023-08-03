@@ -575,3 +575,29 @@ bookTitle2 {
 .delete-review{
     margin-left:950px;
 }
+
+.fillInBody{
+    margin-top:200px;
+    margin-bottom:400px;
+    margin-left:350px;
+}
+
+.fillInBody h2{
+    margin-bottom:100px;
+    margin-left:20px;
+}
+
+.fillInBody form{
+    margin-left:40px;
+    margin-bottom:30px;
+}
+
+.fillInBody p{
+    margin-left:180px;
+    margin-top:20px;
+    color:darkred;
+    font-family:'Times New Roman';
+    font-style:italic
+}
+
+

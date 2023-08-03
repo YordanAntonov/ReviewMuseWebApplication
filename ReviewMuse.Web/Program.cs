@@ -13,6 +13,7 @@ namespace ReviewMuse.Web
     using ReviewMuse.Services.ReviewService;
     using ReviewMuse.Services.UserService;
     using ReviewMuse.Web.Infrastructure.ModelBinders;
+    using Stripe;
 
     public class Program
     {
@@ -55,7 +56,7 @@ namespace ReviewMuse.Web
             //Services
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IEditorService, EditorService>();
-            builder.Services.AddScoped<IReviewService, ReviewService>();
+            builder.Services.AddScoped<IReviewService, Services.ReviewService.ReviewService>();
             builder.Services.AddScoped<IAuthorService, AuthorService>();
             builder.Services.AddScoped<IBookService, BookService>();
             builder.Services.AddScoped<IUserService, UserService>();
@@ -78,6 +79,8 @@ namespace ReviewMuse.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 
             app.UseAuthentication();
             app.UseAuthorization();

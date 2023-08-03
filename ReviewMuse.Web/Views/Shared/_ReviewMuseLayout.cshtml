@@ -48,6 +48,10 @@
                             <li><a asp-controller="Author" asp-action="GetAuthorsForAddingBook">Add New Book <span title="Editor Profile" class="glyphicon glyphicon-pencil"></span></a></li>
                         }
 
+                        @if (!userIsEditor)
+                        {
+                            <li><a asp-controller="Editor" asp-action="BecomeEditor">Become Editor<span title="Editor Profile" class="glyphicon glyphicon-pencil"></span></a></li>
+                        }
                     }
 
                 </ul>

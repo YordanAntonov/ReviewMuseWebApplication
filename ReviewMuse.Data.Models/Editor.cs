@@ -12,6 +12,7 @@ namespace ReviewMuse.Data.Models
         {
             this.EditorSince = DateTime.UtcNow;
             this.EditorBooks = new HashSet<Book>();
+            this.IsActive = true;
         }
 
         [Key]

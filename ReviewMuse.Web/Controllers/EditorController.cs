@@ -5,6 +5,9 @@
     using ReviewMuse.Services.Contracts;
     using ReviewMuse.Web.Infrastructure.Extensions;
     using ReviewMuse.Web.Models.ImportModels;
+    using Stripe;
+    using Stripe.Checkout;
+    using System.Security.Claims;
 
     public class EditorController : BaseController
     {
@@ -369,6 +372,100 @@
             TempData["SuccessMessage"] = $"Successfully Edited {model.FullName}!";
 
             return RedirectToAction("GetAuthorById", "Author", new { id = model.AuthorId });
+        }
+
+        public async Task<IActionResult> BecomeEditor()
+        {
+            string userId = User.GetId();
+            bool userIsEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
+
+            if (userIsEditor)
+            {
+                TempData["WarningMessage"] = "Access Denied! You have already become an editor!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            var domain = "https://localhost:7235/";
+
+            var options = new SessionCreateOptions
+            {
+                SuccessUrl = domain + $"Editor/FillDetails",
+                CancelUrl = domain + $"Home/Index",
+                LineItems = new List<SessionLineItemOptions>(),
+                Mode = "payment",
+                CustomerEmail = User.FindFirstValue(ClaimTypes.Email)
+            };
+
+            var sessionListItem = new SessionLineItemOptions
+            {
+                PriceData = new SessionLineItemPriceDataOptions
+                {
+                    UnitAmount = 20000,
+                    Currency = "bgn",
+                    ProductData = new SessionLineItemPriceDataProductDataOptions
+                    {
+                        Name = "One time Payment to join our Community of Editors in ReviewMuse."
+                    }
+                },
+                Quantity = 1
+            };
+
+            options.LineItems.Add(sessionListItem);
+
+            var service = new SessionService();
+            Session session = service.Create(options);
+
+            Response.Headers.Add("Location", session.Url);
+
+            return new StatusCodeResult(303);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FillDetails()
+        {
+            string userId = User.GetId();
+            bool userIsEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
+
+            if (userIsEditor)
+            {
+                TempData["ErrorMessage"] = "Access Denied! You have already become an editor!";
+
+                return RedirectToAction("Index", "Home");
+            }         
+
+            TempData["SuccessMessage"] = "Successfull Payment! Please continue with the next step.";
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FillDetails(ImpoNewEditorViewModel model)
+        {
+            string userId = User.GetId();
+            bool userIsEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
+
+            if (userIsEditor)
+            {
+                TempData["ErrorMessage"] = "Access Denied! You have already become an editor!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                TempData["ErrorMessage"] = "Submition Invalid!";
+
+                View(model);
+            }
+
+            model.UserId = userId;
+
+            await this.editorService.BecomeEditorAsync(model);
+
+            TempData["SuccessMessage"] = "Congratulations! You have become an Editor. Thank you for the support!";
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

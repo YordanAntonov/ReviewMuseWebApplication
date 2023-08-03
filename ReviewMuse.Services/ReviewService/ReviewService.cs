@@ -48,6 +48,13 @@
                 .FirstAsync(r => r.Id.ToString() == id);
 
             review.IsActive = false;
+            string bookId = review.BookId.ToString();
+
+            Book book = await this.dbContext
+                .Books
+                .FirstAsync(b => b.Id.ToString() == bookId);
+
+            book.TotalRating -= review.Rating;
 
             await this.dbContext.SaveChangesAsync();
         }
