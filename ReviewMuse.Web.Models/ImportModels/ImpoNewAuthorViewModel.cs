@@ -12,6 +12,8 @@
             this.GanresId = new HashSet<int>();
         }
 
+        public string? AuthorId { get; set; }
+
         [Required]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength)]
         [Display(Name = "Author Full Name")]
@@ -48,9 +50,9 @@
         [Display(Name = "Pseudonim of the Author")]
         public string? Pseudonim { get; set; }
 
-        public IEnumerable<int> GanresId { get; set; } = null!;
+        public IEnumerable<int>? GanresId { get; set; }
 
         [Display(Name = "Ganres of the Author")]
-        public IEnumerable<ImpoCategoriesForBookAndAuthorViewModel> Ganres = null!;
+        public IEnumerable<ImpoCategoriesForBookAndAuthorViewModel>? Ganres { get; set; }
     }
 }

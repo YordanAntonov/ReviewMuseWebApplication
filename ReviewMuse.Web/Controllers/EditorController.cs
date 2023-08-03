@@ -195,5 +195,180 @@
 
             return RedirectToAction("GetAuthorsForAddingBook", "Author");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EditBook(string id)
+        {
+            string userId = User.GetId();
+            bool userIsEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
+
+            if (!userIsEditor)
+            {
+                TempData["ErrorMessage"] = "Access Denied! You must be an editor in order to access this page!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            string editorId = await this.editorService.GetEditorIdViaUserIdAsync(Guid.Parse(userId));
+
+            bool bookIsValid = await this.bookService.BookExistsById(id);
+
+            if (!bookIsValid)
+            {
+                TempData["ErrorMessage"] = "The book you selected does not exist!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            string bookEditorId = await this.bookService.GetBookEditorId(id);
+
+            if (bookEditorId != editorId)
+            {
+                TempData["InfoMessage"] = "You are not the creator of this book! You can edit only books that you have added!";
+
+                return RedirectToAction("GetAuthorsForAddingBook", "Author");
+            }
+
+            ImpoNewBookViewModel model = await this.editorService.GetEditBookAsync(id);
+            model.Ganres = await this.categoryService.GetCategoriesAsync();
+            model.BookCovers = await this.bookService.GetBookCoversAsync();
+            model.Languages = await this.bookService.GetBookLanguagesAsync();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditBook(ImpoNewBookViewModel model)
+        {
+            string userId = this.User.GetId();
+
+            bool isEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
+
+            if (!isEditor)
+            {
+                TempData["ErrorMessage"] = "Access Denied! You must be an editor in order to access this page!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                TempData["ErrorMessage"] = "Submition Invalid!";
+
+                model.BookCovers = await this.bookService.GetBookCoversAsync();
+                model.Languages = await this.bookService.GetBookLanguagesAsync();
+                model.Ganres = await this.categoryService.GetCategoriesAsync();
+
+                return View(model);
+            }
+
+            bool idInvalid = false;
+
+            if (model.GanresId != null)
+            {
+                foreach (var id in model.GanresId)
+                {
+                    if (!await this.categoryService.CategoryExistByIdAsync(id))
+                    {
+                        idInvalid = true;
+                    }
+
+                    if (idInvalid)
+                    {
+                        TempData["ErrorMessage"] = "Submitted invalid Category!";
+                        model.Ganres = await this.categoryService.GetCategoriesAsync();
+                        return View(model);
+                    }
+
+                }
+            }
+
+            await this.editorService.EditBookAsync(model);
+
+            TempData["SuccessMessage"] = $"Successfully Edited {model.Title}!";
+
+            return RedirectToAction("GetBookById", "Book", new { id = model.BookId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditAuthor(string id)
+        {
+            string userId = User.GetId();
+            bool userIsEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
+
+            if (!userIsEditor)
+            {
+                TempData["ErrorMessage"] = "Access Denied! You must be an editor in order to access this page!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            string editorId = await this.editorService.GetEditorIdViaUserIdAsync(Guid.Parse(userId));
+
+            bool authorIsValid = await this.authorService.AuthorExistByIdAsync(id);
+
+            if (!authorIsValid)
+            {
+                TempData["ErrorMessage"] = "The author you selected does not exist!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            ImpoNewAuthorViewModel model = await this.editorService.GetEditAuthorAsync(id);
+            model.Ganres = await this.categoryService.GetCategoriesAsync();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditAuthor(ImpoNewAuthorViewModel model)
+        {
+            string userId = this.User.GetId();
+
+            bool isEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
+
+            if (!isEditor)
+            {
+                TempData["ErrorMessage"] = "Access Denied! You must be an editor in order to access this page!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                TempData["ErrorMessage"] = "Submition Invalid!";
+
+                model.Ganres = await this.categoryService.GetCategoriesAsync();
+
+                return View(model);
+            }
+
+            bool idInvalid = false;
+
+            if (model.GanresId != null)
+            {
+                foreach (var id in model.GanresId)
+                {
+                    if (!await this.categoryService.CategoryExistByIdAsync(id))
+                    {
+                        idInvalid = true;
+                    }
+
+                    if (idInvalid)
+                    {
+                        TempData["ErrorMessage"] = "Submitted invalid Category!";
+                        model.Ganres = await this.categoryService.GetCategoriesAsync();
+                        return View(model);
+                    }
+
+                }
+            }
+
+            await this.editorService.EditAuthorAsync(model);
+
+            TempData["SuccessMessage"] = $"Successfully Edited {model.FullName}!";
+
+            return RedirectToAction("GetAuthorById", "Author", new { id = model.AuthorId });
+        }
     }
 }

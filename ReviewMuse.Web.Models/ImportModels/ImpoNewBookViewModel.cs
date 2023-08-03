@@ -11,7 +11,9 @@
             this.BookCovers = new HashSet<ImpoCoverTypeViewModel>();
             this.Languages = new HashSet<ImpoLanguageViewModel>();
         }
-        public string AuthorId { get; set; } = null!;
+
+        public string? BookId { get; set; }
+        public string? AuthorId { get; set; } 
 
         [Required]
         [StringLength(TitleMaxLength, MinimumLength = TitleMinLength)]
@@ -51,10 +53,9 @@
 
         public IEnumerable<ImpoLanguageViewModel> Languages { get; set; }
 
-        [Required]
-        public IEnumerable<int> GanresId { get; set; } = null!;
+        public IEnumerable<int>? GanresId { get; set; }
 
         [Display(Name = "Ganres of the Book")]
-        public IEnumerable<ImpoCategoriesForBookAndAuthorViewModel> Ganres = null!;
+        public IEnumerable<ImpoCategoriesForBookAndAuthorViewModel>? Ganres { get; set; }
     }
 }

@@ -11,5 +11,13 @@ namespace ReviewMuse.Services.Contracts
         Task AddNewLanguage(ImpoLanguageViewModel model);
 
         Task AddNewCoverType(ImpoCoverTypeViewModel model);
+
+        Task<ImpoNewBookViewModel> GetEditBookAsync(string bookId);
+
+        Task EditBookAsync(ImpoNewBookViewModel model);
+
+        Task<ImpoNewAuthorViewModel> GetEditAuthorAsync(string authorId);
+
+        Task EditAuthorAsync(ImpoNewAuthorViewModel model);
     }
 }

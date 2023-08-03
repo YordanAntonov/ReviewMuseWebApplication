@@ -20,6 +20,6 @@
 
         Task<IEnumerable<ImpoLanguageViewModel>> GetBookLanguagesAsync();
 
-
+        Task<string> GetBookEditorId(string id);
     }
 }

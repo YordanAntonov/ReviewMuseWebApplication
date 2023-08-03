@@ -12,9 +12,11 @@
     ViewData["Title"] = $"{Model.Title} - ReviewMuse";
 
     string bookId = this.Model.BookId!;
+    string userId = UserManager.GetUserId(this.User);
 
     bool hasBookFavourite = await UserService.UserHasBookAsFavouriteAsync(bookId, UserManager.GetUserId(this.User));
 
+    bool isUserEditor = await editorService.IsUserEditorById(Guid.Parse(userId));
 }
 
 <div class="container-fluid bookDetails">
@@ -66,6 +68,13 @@
                         </div>
                     </form>
                 }
+
+                @if (isUserEditor)
+                {
+                    <div style="margin-left:80px; margin-top:20px">
+                        <a class="btn btn-primary" asp-controller="Editor" asp-action="EditBook" asp-route-id="@Model.BookId">Edit</a>
+                    </div>
+                }
             }
             <div class="amazonBtn">
                 @if (Model.AmazonLink != null)
@@ -74,7 +83,9 @@
                         <img src="~/amazon-logo.png" alt="Amazon" class="amazon-logo"> Buy on Amazon
                     </a>
                 }
+
             </div>
+
         </div>
 
         <div class="col-md-8 mainDetails">

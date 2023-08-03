@@ -63,6 +63,7 @@
                 .Where(a => a.IsActive && a.Id.ToString() == id)
                 .Select(a => new ExpoAuthorPageViewModel()
                 {
+                    Id = a.Id.ToString(),
                     FullName = a.FullName,
                     Pseudonim = a.Pseudonim,
                     Description = a.Description,

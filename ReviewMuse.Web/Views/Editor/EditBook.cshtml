@@ -1,0 +1,123 @@
+﻿@model ImpoNewBookViewModel
+@{
+    ViewData["Title"] = "Edit Book - ReviewMuse";
+}
+
+
+
+<div class="container-fluid addBookContainer">
+
+    <h2>Edit "@Model.Title"</h2>
+
+    <form method="post">
+        <div class="row">
+            <div class="col-md-6">
+
+                <input type="hidden" asp-for="BookId" value="@Model.BookId" />
+
+                <div class="form-group" style="display: none;">
+                    <label asp-for="AuthorId">Author ID</label>
+                    <input asp-for="AuthorId" class="form-control" type="hidden" readonly />
+                    <span asp-validation-for="AuthorId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Title">*Book Title</label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description">*Short Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PublishingDate">*Date of publishing (yyyy-MM-dd)</label>
+                    <input asp-for="PublishingDate" class="form-control" />
+                    <span asp-validation-for="PublishingDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ImageUrl">Image URL</label>
+                    <input asp-for="ImageUrl" class="form-control" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+
+                <p class="authorNotif">Fields with '*' are mandatory.</p>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="NumberOfPages">*Number of Pages</label>
+                    <input asp-for="NumberOfPages" class="form-control" type="number" min="1"/>
+                    <span asp-validation-for="NumberOfPages" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ISBN">*ISBN</label>
+                    <input asp-for="ISBN" class="form-control" />
+                    <span asp-validation-for="ISBN" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="AmazonLink">Amazon Link</label>
+                    <input asp-for="AmazonLink" class="form-control" />
+                    <span asp-validation-for="AmazonLink" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CoverId">*Book Cover</label>
+                        <select asp-for="CoverId" class="form-control">
+                            <option value="">Select a Book Cover</option>
+                            <!-- Iterate through the collection of BookCovers to populate the dropdown -->
+                            @foreach (var bookCover in Model.BookCovers)
+                            {
+                                <option value="@bookCover.CoverId">@bookCover.CoverName</option>
+                            }
+                        </select>
+                        <span asp-validation-for="CoverId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LanguageId">*Language</label>
+                        <select asp-for="LanguageId" class="form-control">
+                            <option value="">Select a Language</option>
+                            <!-- Iterate through the collection of Languages to populate the dropdown -->
+                            @foreach (var language in Model.Languages)
+                            {
+                                <option value="@language.LanguageId">@language.LanguageName</option>
+                            }
+                        </select>
+                        <span asp-validation-for="LanguageId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="GanresId">Genres of the Book</label>
+                        <select asp-for="GanresId" class="form-control" multiple>
+                            <!-- Iterate through the collection of Ganres to populate the dropdown -->
+                            @foreach (var genre in Model.Ganres)
+                            {
+                                <option value="@genre.Id">@genre.CategoryName</option>
+                            }
+                        </select>
+                        <span asp-validation-for="GanresId" class="text-danger"></span>
+                    </div>
+                    <p>In order to select multiple Ganres Hold CTRL + Mouse Left Click</p>
+                    <a class="btn btn-primary" asp-controller="Categories" asp-action="AddCategory" style="margin-top:20px">
+                        Add New Ganre
+                    </a>
+                    <a class="btn btn-primary" asp-controller="Editor" asp-action="AddLanguage" style="margin-top:20px">
+                        Add Language
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Edit</button>
+
+
+    </form>
+
+</div>

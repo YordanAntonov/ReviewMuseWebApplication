@@ -213,6 +213,15 @@
             return model;
         }
 
+        public async Task<string> GetBookEditorId(string id)
+        {
+            Book book = await this.dbContext
+                .Books
+                .FirstAsync(b => b.IsActive && b.Id.ToString() == id);
+
+            return book.EditorId.ToString();
+        }
+
         public async Task<IEnumerable<ImpoLanguageViewModel>> GetBookLanguagesAsync()
         {
             IEnumerable<ImpoLanguageViewModel> model = await this.dbContext
