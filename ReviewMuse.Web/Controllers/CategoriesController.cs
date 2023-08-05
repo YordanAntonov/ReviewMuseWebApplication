@@ -6,6 +6,7 @@
     using ReviewMuse.Web.Infrastructure.Extensions;
     using ReviewMuse.Web.Models.ExportModels;
     using ReviewMuse.Web.Models.ImportModels;
+    using static ReviewMuse.Common.GeneralConstants;
 
     public class CategoriesController : BaseController
     {
@@ -23,38 +24,57 @@
         [HttpGet]
         public async Task<IActionResult> GetCategoryById(int id)
         {
-            bool categoryExist = await this.categoryService
-                .CategoryExistByIdAsync(id);
-
-            if (!categoryExist)
+            try
             {
-                TempData["ErrorMessage"] = "The Category you selected does not exist!";
+                bool categoryExist = await this.categoryService
+                    .CategoryExistByIdAsync(id);
 
-                return RedirectToAction("AllBooks", "Book");
+                if (!categoryExist)
+                {
+                    TempData["ErrorMessage"] = "The Category you selected does not exist!";
+
+                    return RedirectToAction("AllBooks", "Book");
+                }
+
+                ExpoCategoryViewModel model = await this.categoryService
+                    .GetCategoryByIdAsync(id);
+
+                return View(model);
             }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = generalErrorConst;
 
-            ExpoCategoryViewModel model = await this.categoryService
-                .GetCategoryByIdAsync(id);
-
-            return View(model);
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> AddCategory()
         {
-            string userId = this.User.GetId();
-
-            bool isEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
-            if (!isEditor)
+            try
             {
-                TempData["ErrorMessage"] = "Access Denied! You must be an editor in order to access this page!";
+                string userId = this.User.GetId();
+
+                bool isEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
+                if (!isEditor)
+                {
+                    TempData["ErrorMessage"] = "Access Denied! You must be an editor in order to access this page!";
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                return View();
+            }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = generalErrorConst;
 
                 return RedirectToAction("Index", "Home");
             }
-
-            return View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> AddCategory(ImpoNewCategoryViewModel model)
         {
             if (!ModelState.IsValid)
@@ -64,11 +84,21 @@
                 return View(model);
             }
 
-            await this.categoryService.AddCategoryAsync(model);
+            try
+            {
+                await this.categoryService.AddCategoryAsync(model);
 
-            TempData["SuccessMessage"] = "Succesfully added new Ganre!";
+                TempData["SuccessMessage"] = "Succesfully added new Ganre!";
 
-            return RedirectToAction("GetAuthorsForAddingBook", "Author");
+                return RedirectToAction("GetAuthorsForAddingBook", "Author");
+            }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = generalErrorConst;
+
+                return RedirectToAction("Index", "Home");
+            }
+
         }
     }
 }

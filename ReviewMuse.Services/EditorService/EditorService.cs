@@ -177,5 +177,15 @@
                 .AnyAsync(e => e.UserId == id);
         }
 
+        public async Task RemoveBookAsync(string id)
+        {
+            Book book = await this.dbContext
+                .Books
+                .FirstAsync(b => b.IsActive && b.Id.ToString() == id);
+
+            book.IsActive = false;
+
+            await this.dbContext.SaveChangesAsync();
+        }
     }
 }

@@ -6,6 +6,7 @@
     using ReviewMuse.Services.Contracts;
     using ReviewMuse.Web.Models.ExportModels;
     using static Common.ToastrMessages;
+    using static ReviewMuse.Common.GeneralConstants;
 
     public class BookController : BaseController
     {
@@ -22,40 +23,64 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> AllBooks([FromQuery]ExpoAllBooksQueryViewModel queryModel)
+        public async Task<IActionResult> AllBooks([FromQuery] ExpoAllBooksQueryViewModel queryModel)
         {
-            var serviceModel = await this.bookService.AllAsync(queryModel);
+            try
+            {
+                var serviceModel = await this.bookService.AllAsync(queryModel);
 
-            queryModel.Books = serviceModel.Books;
-            queryModel.TotalBooks = serviceModel.TotalBooksCount;
-            queryModel.Categories = await this.categoryService.AllCategoriesAsync();
+                queryModel.Books = serviceModel.Books;
+                queryModel.TotalBooks = serviceModel.TotalBooksCount;
+                queryModel.Categories = await this.categoryService.AllCategoriesAsync();
 
-            return View(queryModel);
+
+                return View(queryModel);
+            }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = generalErrorConst;
+
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> GetBookById(string id)
         {
-            bool bookExists = await this.bookService.BookExistsById(id);
-
-            if (!bookExists)
+            try
             {
-                TempData["ErrorMessage"] = "The book you selected does not exist in our library!";
 
-                return RedirectToAction("AllBooks", "Book");
+                bool bookExists = await this.bookService.BookExistsById(id);
+
+                if (!bookExists)
+                {
+                    TempData["ErrorMessage"] = "The book you selected does not exist in our library!";
+
+                    return RedirectToAction("AllBooks", "Book");
+                }
+
+                ExpoSingleBookViewModel model = await this.bookService.GetBookByIdAsync(id);
+
+                bool bookHasReviews = await this.reviewService.BookHasReviewsAsync(model.BookId!);
+
+                if (bookHasReviews)
+                {
+                    model.BookReviews = await this.reviewService.GetAllReviewsAsync(model.BookId!);
+                }
+
+                return View(model);
+
+            }
+            catch (Exception)
+            {
+
+                TempData["ErrorMessage"] = generalErrorConst;
+
+                return RedirectToAction("Index", "Home");
             }
 
-            ExpoSingleBookViewModel model = await this.bookService.GetBookByIdAsync(id);
-
-            bool bookHasReviews = await this.reviewService.BookHasReviewsAsync(model.BookId!);
-
-            if (bookHasReviews)
-            {
-                model.BookReviews = await this.reviewService.GetAllReviewsAsync(model.BookId!);
-            }
-
-            return View(model);
         }
 
     }

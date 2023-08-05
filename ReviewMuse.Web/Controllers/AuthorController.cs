@@ -7,6 +7,7 @@
     using ReviewMuse.Web.Infrastructure.Extensions;
     using ReviewMuse.Web.Models.ExportModels;
     using ReviewMuse.Web.Models.ImportModels;
+    using static ReviewMuse.Common.GeneralConstants;
 
     public class AuthorController : BaseController
     {
@@ -26,41 +27,58 @@
         [AllowAnonymous]
         public async Task<IActionResult> GetAuthorById(string id)
         {
-            bool idIsValid = await this.authorService
-                .AuthorExistByIdAsync(id);
-
-            if (!idIsValid)
+            try
             {
-                TempData["ErrorMessage"] = "The selected author does not exist in out system yet!";
+                bool idIsValid = await this.authorService
+                    .AuthorExistByIdAsync(id);
+
+                if (!idIsValid)
+                {
+                    TempData["ErrorMessage"] = "The selected author does not exist in out system yet!";
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ExpoAuthorPageViewModel model = await this.authorService.GetAuthorByIdAsync(id);
+
+                return View(model);
+            }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = generalErrorConst;
 
                 return RedirectToAction("Index", "Home");
-
-                //Change later to All Authors
             }
-
-            ExpoAuthorPageViewModel model = await this.authorService.GetAuthorByIdAsync(id);
-
-            return View(model);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAuthorsForAddingBook()
         {
-            string userId = this.User.GetId();
-
-            bool isEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
-
-            if (!isEditor)
+            try
             {
-                TempData["ErrorMessage"] = "Access Denied! You must be an editor in order to access this page!";
+                string userId = this.User.GetId();
+
+                bool isEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
+
+                if (!isEditor)
+                {
+                    TempData["ErrorMessage"] = "Access Denied! You must be an editor in order to access this page!";
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                IEnumerable<ExpoAuthorForAddingNewBookView> model = await this.authorService
+                    .GetAuthorForAddingBookAsync();
+
+                return View(model);
+
+            }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = generalErrorConst;
 
                 return RedirectToAction("Index", "Home");
             }
-
-            IEnumerable<ExpoAuthorForAddingNewBookView> model = await this.authorService
-                .GetAuthorForAddingBookAsync();
-
-            return View(model);
         }
 
     }

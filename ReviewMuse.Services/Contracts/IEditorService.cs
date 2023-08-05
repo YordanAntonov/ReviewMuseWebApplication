@@ -21,5 +21,7 @@ namespace ReviewMuse.Services.Contracts
         Task EditAuthorAsync(ImpoNewAuthorViewModel model);
 
         Task BecomeEditorAsync(ImpoNewEditorViewModel model);
+
+        Task RemoveBookAsync(string id);
     }
 }
