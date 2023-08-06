@@ -514,8 +514,8 @@
                 {
                     PriceData = new SessionLineItemPriceDataOptions
                     {
-                        UnitAmount = 20000,
-                        Currency = "bgn",
+                        UnitAmount = UnitAmount,
+                        Currency = StripeCurrency,
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
                             Name = "One time Payment to join our Community of Editors in ReviewMuse."
