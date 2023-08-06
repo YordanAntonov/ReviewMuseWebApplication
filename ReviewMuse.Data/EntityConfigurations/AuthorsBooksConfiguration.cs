@@ -9,7 +9,7 @@
     {
         public void Configure(EntityTypeBuilder<AuthorsBooks> builder)
         {
-            builder.HasData(this.GenerateAuthorsBooks());
+            //builder.HasData(this.GenerateAuthorsBooks());
 
             builder
                 .HasKey(e => new { e.AuthorId, e.BookId });

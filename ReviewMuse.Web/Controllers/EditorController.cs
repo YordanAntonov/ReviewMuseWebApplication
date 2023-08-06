@@ -35,7 +35,9 @@
 
                 bool isEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
 
-                if (!isEditor)
+                bool isAdmin = this.User.IsAdmin();
+
+                if (!isEditor && !isAdmin)
                 {
                     TempData["ErrorMessage"] = "Access Denied! You must be an editor in order to access this page!";
 
@@ -66,8 +68,9 @@
                 string userId = this.User.GetId();
 
                 bool isEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
+                bool isAdmin = this.User.IsAdmin();
 
-                if (!isEditor)
+                if (!isEditor && !isAdmin)
                 {
                     TempData["ErrorMessage"] = "Access Denied! You must be an editor in order to access this page!";
 
@@ -153,9 +156,10 @@
             {
                 string userId = this.User.GetId();
 
+                bool isAdmin = this.User.IsAdmin();
                 bool isEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
 
-                if (!isEditor)
+                if (!isEditor && !isAdmin)
                 {
                     TempData["ErrorMessage"] = "Access Denied! You must be an editor in order to access this page!";
 
@@ -215,9 +219,10 @@
             try
             {
                 string userId = this.User.GetId();
+                bool isAdmin = this.User.IsAdmin();
 
                 bool isEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
-                if (!isEditor)
+                if (!isEditor && !isAdmin)
                 {
                     TempData["ErrorMessage"] = "Access Denied! You must be an editor in order to access this page!";
 
@@ -270,8 +275,9 @@
             {
                 string userId = User.GetId();
                 bool userIsEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
+                bool isAdmin = this.User.IsAdmin();
 
-                if (!userIsEditor)
+                if (!userIsEditor && !isAdmin)
                 {
                     TempData["ErrorMessage"] = "Access Denied! You must be an editor in order to access this page!";
 
@@ -291,7 +297,7 @@
 
                 string bookEditorId = await this.bookService.GetBookEditorId(id);
 
-                if (bookEditorId != editorId)
+                if (bookEditorId != editorId && !isAdmin)
                 {
                     TempData["InfoMessage"] = "You are not the creator of this book! You can edit only books that you have added!";
 
@@ -523,6 +529,8 @@
                 var service = new SessionService();
                 Session session = service.Create(options);
 
+                TempData["Session"] = session.Id;
+
                 Response.Headers.Add("Location", session.Url);
 
                 return new StatusCodeResult(303);
@@ -551,9 +559,29 @@
                     return RedirectToAction("Index", "Home");
                 }
 
-                TempData["SuccessMessage"] = "Successfull Payment! Please continue with the next step.";
+                if (TempData["Session"] == null)
+                {
+                    TempData["ErrorMessage"] = "Unauthorized access! In order to access this page you have to pay to become Editor!";
 
-                return View();
+                    return RedirectToAction("Index", "Home");
+                }
+
+                var service = new SessionService();
+                Session session = service.Get(TempData["Session"].ToString());
+
+                if (session.PaymentStatus == SessionPayedStatus)
+                {
+                    TempData["SuccessMessage"] = "Successfull Payment! Please continue with the next step.";
+
+                    return View();
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Unauthorized access! In order to access this page you have to pay to become Editor!";
+
+                    return RedirectToAction("Index", "Home");
+                }
+
             }
             catch (Exception)
             {
@@ -568,8 +596,10 @@
         {
             try
             {
+                bool isAdmin = this.User.IsAdmin();
                 string userId = User.GetId();
                 bool userIsEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
+
 
                 if (!userIsEditor)
                 {
@@ -591,7 +621,7 @@
 
                 string bookEditorId = await this.bookService.GetBookEditorId(id);
 
-                if (bookEditorId != editorId)
+                if (bookEditorId != editorId && !isAdmin)
                 {
                     TempData["InfoMessage"] = "You are not the creator of this book! You can remove only books that you have added!";
 

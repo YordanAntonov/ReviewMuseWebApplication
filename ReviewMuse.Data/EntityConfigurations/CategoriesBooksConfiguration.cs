@@ -9,7 +9,7 @@
     {
         public void Configure(EntityTypeBuilder<CategoriesBooks> builder)
         {
-            builder.HasData(this.GenerateCategoriesBooks());
+            //builder.HasData(this.GenerateCategoriesBooks());
 
             //Table composite key
             builder

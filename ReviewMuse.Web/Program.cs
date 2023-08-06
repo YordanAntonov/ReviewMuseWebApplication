@@ -1,5 +1,6 @@
 namespace ReviewMuse.Web
 {
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,10 @@ namespace ReviewMuse.Web
     using ReviewMuse.Services.ReviewService;
     using ReviewMuse.Services.UserService;
     using ReviewMuse.Web.Infrastructure.ModelBinders;
+    using ReviewMuse.Web.Infrastructure.Extensions;
+
+    using static ReviewMuse.Common.GeneralConstants;
+
     using Stripe;
 
     public class Program
@@ -43,6 +48,7 @@ namespace ReviewMuse.Web
                 options.Lockout.MaxFailedAccessAttempts = builder.Configuration.GetValue<int>("Identity:Lockout:MaxFailedAccessAttempts");
 
             })
+                .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<ReviewMuseDbContext>();
 
             builder.Services
@@ -84,6 +90,11 @@ namespace ReviewMuse.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            if (app.Environment.IsDevelopment())
+            {
+                app.SeedAdministrator(FirstAdminSeedEmail);
+            }
 
             app.MapControllerRoute(
                 name: "default",
