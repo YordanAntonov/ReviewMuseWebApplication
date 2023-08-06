@@ -9,8 +9,6 @@
 
 @{
     ViewData["Title"] = $"{Model.FullName} - ReviewMuse";
-    string userId = UserManager.GetUserId(this.User);
-    bool isUserEditor = await editorService.IsUserEditorById(Guid.Parse(userId));
 }
 
 <div class="container2 container-fluid">
@@ -19,11 +17,17 @@
 
             <img src="@Model.ImageUrl" alt="Author Image" class="img-fluid">
 
-            @if (isUserEditor)
+            @if (SignInManager.IsSignedIn(User))
             {
-                <div style="margin-left:65px; margin-top:20px">
-                    <a class="btn btn-primary" asp-controller="Editor" asp-action="EditAuthor" asp-route-id="@Model.Id">Edit</a>
-                </div>
+                string userId = UserManager.GetUserId(this.User);
+                bool isUserEditor = await editorService.IsUserEditorById(Guid.Parse(userId));
+
+                @if (isUserEditor)
+                {
+                    <div style="margin-left:65px; margin-top:20px">
+                        <a class="btn btn-primary" asp-controller="Editor" asp-action="EditAuthor" asp-route-id="@Model.Id">Edit</a>
+                    </div>
+                }
             }
 
 
@@ -85,7 +89,7 @@
                             @foreach (var book in Model.Books)
                             {
                                 <div class="book-card2">
-                                     <a asp-controller="Book" asp-action="GetBookById" asp-route-id="@book.Id">
+                                    <a asp-controller="Book" asp-action="GetBookById" asp-route-id="@book.Id">
                                         <img src="@book.ImageUrl" alt="@book.Title">
                                         <p class="bookTitle2">@book.Title</p>
                                     </a>

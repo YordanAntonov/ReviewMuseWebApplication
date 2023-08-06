@@ -19,11 +19,14 @@
                 <span class="star @(review.Rating >= i ? "filled" : "empty")">&#9733;</span>
             }
         </div>
-        @if (await editorService.IsUserEditorById(Guid.Parse(UserManager.GetUserId(this.User))))
+        @if (SignInManager.IsSignedIn(User))
         {
-            <div class="delete-review">
-                <a asp-controller="Review" asp-action="RemoveReview" asp-route-id="@review.Id" onclick="return confirmDelete();"><span class="glyphicon glyphicon-trash"></span></a>
-            </div>
+            @if (await editorService.IsUserEditorById(Guid.Parse(UserManager.GetUserId(this.User))))
+            {
+                <div class="delete-review">
+                    <a asp-controller="Review" asp-action="RemoveReview" asp-route-id="@review.Id" onclick="return confirmDelete();"><span class="glyphicon glyphicon-trash"></span></a>
+                </div>
+            }
         }
         <div class="comment">
             @review.Comment
