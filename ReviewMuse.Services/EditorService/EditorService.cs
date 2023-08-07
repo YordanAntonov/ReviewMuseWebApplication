@@ -174,7 +174,7 @@
         {
             return await this.dbContext
                 .Editors
-                .AnyAsync(e => e.UserId == id);
+                .AnyAsync(e => e.UserId == id && e.IsActive);
         }
 
         public async Task RemoveBookAsync(string id)

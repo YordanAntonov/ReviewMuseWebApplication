@@ -5,7 +5,7 @@
             <th>Title</th>
             <th>Authors</th>
             <th>Total Rating</th>
-            <th>First Published</th>
+            <th>First Published <span class="glyphicon glyphicon-calendar"></span></th>
         </tr>
     </thead>
     <tbody>
@@ -26,7 +26,7 @@
                     <td><a asp-action="GetAuthorById" asp-controller="Author" asp-route-id="@name.Id">@name.Name</a></td>
                 }
                 <td>@book.BookRating <span class="glyphicon glyphicon-star"></span></td>
-                <td>@book.PublishedDate  <span class="glyphicon glyphicon-calendar"></span></td>
+                <td>@book.PublishedDate </td>
             </tr>
         }
     </tbody>

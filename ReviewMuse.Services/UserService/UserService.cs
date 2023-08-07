@@ -47,6 +47,54 @@
             return (Web.Models.Enums.BookStatus)status.BookStatusId;
         }
 
+        public async Task<ExpoUserInfoViewModel> GetUserInfoAsync(string userId)
+        {
+            ApplicationUser user = await this.dbContext
+                .Users
+                .FirstAsync(u => u.Id.ToString() == userId);
+
+
+            ExpoUserInfoViewModel model = new ExpoUserInfoViewModel()
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                TotalStars = await this.GetUserTotalStars(userId),
+                CountOfBookReviews = await this.GetUserTotalReviews(userId),
+            };
+
+            return model;
+                
+        }
+
+        public async Task<int> GetUserTotalReviews(string userId)
+        {
+            var totalReviews = await this.dbContext
+                .Reviews
+                .Where(r => r.UserId.ToString() == userId)
+                .ToListAsync();
+
+            int count = totalReviews.Count();
+
+            return count;
+        }
+
+        public async Task<int> GetUserTotalStars(string userId)
+        {
+            var reviews = await this.dbContext
+                .Reviews
+                .Where(r => r.UserId.ToString() == userId)
+                .ToListAsync();
+
+            int count = 0;
+
+            foreach (var review in reviews)
+            {
+                count += review.Rating;
+            }
+
+            return count;
+        }
+
         public async Task<MyCollectionBookEngineModel> MyCollectionAsync(ExpoMyBooksCollectionQueryModel queryModel, string userId)
         {
             IQueryable<Book> booksQuery = this.dbContext
@@ -137,6 +185,24 @@
 
             this.dbContext.Remove(userBook);
 
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveUserAsync(string userId, bool isUserEditor)
+        {
+            ApplicationUser user = await this.dbContext
+                .Users.FirstAsync(u => u.Id.ToString() == userId);
+
+            if (isUserEditor)
+            {
+                Editor editor = await this.dbContext
+                    .Editors
+                    .FirstAsync(u => u.UserId.ToString() == userId);
+
+                this.dbContext.Editors.Remove(editor);
+            }
+
+            this.dbContext.Users.Remove(user);
             await this.dbContext.SaveChangesAsync();
         }
 

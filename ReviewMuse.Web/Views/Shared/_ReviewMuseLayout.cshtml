@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Review<span style="color:wheat">Muse</span></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Review<span style="color:wheat">Muse</span></a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-left">
@@ -41,16 +41,16 @@
                         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                         bool userIsEditor = await this.editorService.IsUserEditorById(Guid.Parse(userIdClaim!));
 
-                        <li><a asp-controller="User" asp-action="MyBooks">My Collection</a></li>
+                        <li><a asp-area="" asp-controller="User" asp-action="MyBooks">My Collection</a></li>
 
                         @if (userIsEditor)
                         {
-                            <li><a asp-controller="Author" asp-action="GetAuthorsForAddingBook">Add New Book <span title="Editor Profile" class="glyphicon glyphicon-pencil"></span></a></li>
+                            <li><a asp-area="" asp-controller="Author" asp-action="GetAuthorsForAddingBook">Add New Book <span title="Editor Profile" class="glyphicon glyphicon-pencil"></span></a></li>
                         }
 
                         @if (!userIsEditor)
                         {
-                            <li><a asp-controller="Editor" asp-action="BecomeEditor">Become Editor<span title="Editor Profile" class="glyphicon glyphicon-pencil"></span></a></li>
+                            <li><a asp-area="" asp-controller="Editor" asp-action="BecomeEditor">Become Editor<span title="Editor Profile" class="glyphicon glyphicon-pencil"></span></a></li>
                         }
                     }
 

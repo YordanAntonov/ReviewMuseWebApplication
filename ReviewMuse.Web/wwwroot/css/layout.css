@@ -600,4 +600,28 @@ bookTitle2 {
     font-style:italic
 }
 
+/*User Info*/
+.userInfo1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.userInfo1 user-details-card {
+  max-width: 700px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+    .userInfo1 remove-btn {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 

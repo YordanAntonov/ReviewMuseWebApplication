@@ -4,19 +4,22 @@
     using ReviewMuse.Services.Contracts;
     using ReviewMuse.Web.Infrastructure.Extensions;
     using ReviewMuse.Web.Models.ExportModels;
+    using Stripe.TestHelpers.Treasury;
     using static ReviewMuse.Common.GeneralConstants;
 
     public class UserController : BaseController
     {
         private readonly IBookService bookService;
         private readonly IUserService userService;
+        private readonly IEditorService editorService;
         private readonly ICategoryService categoryService;
 
-        public UserController(IBookService bookService, IUserService userService, ICategoryService categoryService)
+        public UserController(IBookService bookService, IUserService userService, ICategoryService categoryService, IEditorService editorService)
         {
             this.bookService = bookService;
             this.userService = userService;
             this.categoryService = categoryService;
+            this.editorService = editorService;
         }
 
         public async Task<IActionResult> AddToFavourites(ExpoSingleBookViewModel model)
@@ -130,6 +133,58 @@
             }
             catch (Exception)
             {
+                TempData["ErrorMessage"] = generalErrorConst;
+
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UserDetails()
+        {
+            try
+            {
+                if (!this.User.Identity.IsAuthenticated)
+                {
+                    TempData["ErrorMessage"] = "You must be logged in in order to access this page!";
+
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    string userId = this.User.GetId();
+
+                    ExpoUserInfoViewModel model = await this.userService.GetUserInfoAsync(userId);
+
+                    return View(model);
+                }
+
+            }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = generalErrorConst;
+
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveUser()
+        {
+            try
+            {
+                string userId = this.User.GetId();
+                bool isUserEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
+
+                await this.userService.RemoveUserAsync(userId, isUserEditor);
+
+                TempData["SuccessMessage"] = "Succesfully Removed the account! Click Log Out Otherwise you wont be able to do anything!";
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+
                 TempData["ErrorMessage"] = generalErrorConst;
 
                 return RedirectToAction("Index", "Home");

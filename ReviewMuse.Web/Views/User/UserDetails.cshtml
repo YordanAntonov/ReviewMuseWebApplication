@@ -1,0 +1,26 @@
+﻿@model ExpoUserInfoViewModel
+
+@{
+    ViewData["Title"] = $"{Model.UserName}'s Account - ReviewMuse";
+}
+
+<div class="container-fluid userInfo1">
+    <div class="user-details-card">
+        <h1>Account Details</h1>
+        <div>
+            <p><strong>User Name:</strong> @Model.UserName</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Count of Book Reviews:</strong> @Model.CountOfBookReviews</p>
+            <p><strong>Total Stars:</strong> @Model.TotalStars <span class="glyphicon glyphicon-star"></span></p>
+        </div>
+        <form method="post" asp-controller="User" asp-action="RemoveUser" onsubmit="return confirmDelete()">
+            <button type="submit" class="remove-btn">Remove Account</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete your profile?");
+    }
+</script>

@@ -16,5 +16,13 @@
         Task<Web.Models.Enums.BookStatus> GetUserBookStatus(string userId, string bookId);
 
         Task RemoveFromFavouritesAsync(string bookId, string userId);
+
+        Task<ExpoUserInfoViewModel> GetUserInfoAsync(string userId);
+
+        Task<int> GetUserTotalReviews(string userId);
+
+        Task<int> GetUserTotalStars(string userId);
+
+        Task RemoveUserAsync(string userId, bool isUserEditor);
     }
 }
