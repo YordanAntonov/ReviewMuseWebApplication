@@ -177,6 +177,13 @@
                 .AnyAsync(e => e.UserId == id && e.IsActive);
         }
 
+        public async Task<bool> IsUserEditorByIdNonActive(Guid id)
+        {
+            return await this.dbContext
+               .Editors
+               .AnyAsync(e => e.UserId == id);
+        }
+
         public async Task RemoveBookAsync(string id)
         {
             Book book = await this.dbContext
@@ -184,6 +191,17 @@
                 .FirstAsync(b => b.IsActive && b.Id.ToString() == id);
 
             book.IsActive = false;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveEditor(string id)
+        {
+            Editor editor = await this.dbContext
+                .Editors
+                .FirstAsync(e => e.UserId.ToString() == id);
+
+            editor.IsActive = false;
 
             await this.dbContext.SaveChangesAsync();
         }

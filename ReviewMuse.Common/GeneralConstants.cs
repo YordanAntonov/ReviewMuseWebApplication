@@ -16,6 +16,8 @@
 
         public const string AdminRoleName = "Administrator";
 
+        public const string AdminAreaName = "Admin";
+
         //Here you can replace the email with other user in order to seed the first Amin in the app!
         public const string FirstAdminSeedEmail = "dankata168@gmail.com";
     }

@@ -52,6 +52,11 @@
                         {
                             <li><a asp-area="" asp-controller="Editor" asp-action="BecomeEditor">Become Editor<span title="Editor Profile" class="glyphicon glyphicon-pencil"></span></a></li>
                         }
+
+                        @if (User.IsInRole(AdminRoleName))
+                        {
+                            <li><a asp-area="@AdminAreaName" asp-controller="Home" asp-action="Index">Admin Area<span title="Editor Profile" class="glyphicon glyphicon-text-background"></span></a></li>
+                        }
                     }
 
                 </ul>

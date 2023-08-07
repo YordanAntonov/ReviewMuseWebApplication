@@ -3,6 +3,9 @@
     using ReviewMuse.Data.Models;
     using ReviewMuse.Services.Models.Book;
     using ReviewMuse.Web.Models.ExportModels;
+    using ReviewMuse.Web;
+    using ReviewMuse.Web.Areas.Admin.ViewModels;
+
     public interface IUserService
     {
         Task AddToCollectionAsync(ExpoSingleBookViewModel model, string userId);
@@ -24,5 +27,7 @@
         Task<int> GetUserTotalStars(string userId);
 
         Task RemoveUserAsync(string userId, bool isUserEditor);
+
+        Task<IEnumerable<ExpoAllUsersViewModel>> AllUsersAsync();
     }
 }

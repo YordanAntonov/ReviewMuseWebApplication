@@ -5,6 +5,7 @@ namespace ReviewMuse.Services.Contracts
     public interface IEditorService
     {
         Task<bool> IsUserEditorById(Guid id);
+        Task<bool> IsUserEditorByIdNonActive(Guid id);
 
         Task<string> GetEditorIdViaUserIdAsync(Guid userId);
 
@@ -23,5 +24,7 @@ namespace ReviewMuse.Services.Contracts
         Task BecomeEditorAsync(ImpoNewEditorViewModel model);
 
         Task RemoveBookAsync(string id);
+
+        Task RemoveEditor(string id);
     }
 }

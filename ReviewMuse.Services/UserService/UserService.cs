@@ -9,6 +9,7 @@
     using ReviewMuse.Data.Models.MappingTables;
     using ReviewMuse.Services.Contracts;
     using ReviewMuse.Services.Models.Book;
+    using ReviewMuse.Web.Areas.Admin.ViewModels;
     using ReviewMuse.Web.Models.Enums;
     using ReviewMuse.Web.Models.ExportModels;
     using ReviewMuse.Web.Models.ExportModels.Enums;
@@ -36,6 +37,21 @@
 
             await this.dbContext.UsersBooks.AddAsync(userBook);
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<ExpoAllUsersViewModel>> AllUsersAsync()
+        {
+            IEnumerable<ExpoAllUsersViewModel> model = await this.dbContext
+                .Users
+                .Select(u => new ExpoAllUsersViewModel()
+                {
+                    UserId = u.Id.ToString(),
+                    UserName = u.UserName,
+                    Email = u.Email
+                })
+                .ToListAsync();
+
+            return model;
         }
 
         public async Task<Web.Models.Enums.BookStatus> GetUserBookStatus(string userId, string bookId)
@@ -224,5 +240,7 @@
             return await this.dbContext
                 .UsersBooks.AnyAsync(b => b.IsActive && b.BookId.ToString() == bookId && b.ApplicationUserId.ToString() == userId);
         }
+
+        
     }
 }

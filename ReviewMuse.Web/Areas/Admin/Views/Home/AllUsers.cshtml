@@ -1,0 +1,61 @@
+﻿@using ReviewMuse.Web.Areas.Admin.ViewModels;
+@model IEnumerable<ExpoAllUsersViewModel>
+@{
+    ViewData["Title"] = "All Users - ReviewMuse";
+}
+<div class="container-fluid">
+    <h1 class="mt-4 mb-4">All Users:</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Is User Editor</th>
+                <th>Is User Admin</th>
+                <th>Delete Account</th>
+                <th>Promotions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@user.IsEditor</td>
+                    <td>@user.IsAdmin</td>
+                    <td>
+                        <form asp-area="Admin" asp-controller="Home" asp-action="RemoveAccount" asp-route-id="@user.UserId" method="post" onsubmit="return confirmDeleteUser('@user.UserName')">
+                            <input type="hidden" name="userId" value="@user.UserId" />
+                            <button type="submit" class="btn btn-danger">Remove Account</button>
+                        </form>
+                    </td>
+                    @if (!user.IsAdmin)
+                    {
+                        <td>
+                            <form asp-action="PromoteToAdmin" asp-controller="Home" asp-area="Admin" asp-route-id="@user.UserId" method="post">
+                                <input type="hidden" name="userId" value="@user.UserId" />
+                                <button type="submit" class="btn btn-primary">Promote to Admin</button>
+                            </form>
+                        </td>
+                    }
+                    @if (user.IsEditor)
+                    {
+                        <td>
+                            <form asp-area="Admin" asp-controller="Home" asp-action="RemoveEditor" asp-route-id="@user.UserId" method="post">
+                                <input type="hidden" name="userId" value="@user.UserId" />
+                                <button type="submit" class="btn btn-danger">Remove Editor</button>
+                            </form>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function confirmDeleteUser(userName) {
+        return confirm("Are you sure you want to delete the user: " + userName + "?");
+    }
+</script>
