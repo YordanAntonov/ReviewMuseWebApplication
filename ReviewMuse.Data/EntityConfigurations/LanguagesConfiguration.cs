@@ -8,7 +8,7 @@
     {
         public void Configure(EntityTypeBuilder<Language> builder)
         {
-            //builder.HasData(this.GenerateLanguages());
+            builder.HasData(this.GenerateLanguages());
         }
 
         private Language[] GenerateLanguages()

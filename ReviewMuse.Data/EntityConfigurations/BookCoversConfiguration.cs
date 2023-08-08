@@ -9,7 +9,7 @@
     {
         public void Configure(EntityTypeBuilder<BookCover> builder)
         {
-            //builder.HasData(this.GenerateBookCovers());
+            builder.HasData(this.GenerateBookCovers());
         }
 
         private BookCover[] GenerateBookCovers()

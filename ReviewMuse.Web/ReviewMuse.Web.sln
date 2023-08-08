@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReviewMuse.Web.Models", "..
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReviewMuse.Services", "..\ReviewMuse.Services\ReviewMuse.Services.csproj", "{0DADC09F-BC73-4639-9308-93DA831CE773}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewMuse.Services.Models", "..\ReviewMuse.Services.Models\ReviewMuse.Services.Models.csproj", "{94A50684-CD82-4EAA-A96B-3AED68A41F7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReviewMuse.Services.Models", "..\ReviewMuse.Services.Models\ReviewMuse.Services.Models.csproj", "{94A50684-CD82-4EAA-A96B-3AED68A41F7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F15422E3-8DEF-4755-B92D-A91B092C40EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
