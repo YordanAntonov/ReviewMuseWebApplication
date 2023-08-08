@@ -7,6 +7,7 @@
     using ReviewMuse.Web.Models.ExportModels;
 
     using System.Collections.Generic;
+    using System.Net;
 
     public class ReviewService : IReviewService
     {
@@ -32,7 +33,7 @@
                 {
                     Id = r.Id.ToString(),
                     Rating = r.Rating,
-                    Comment = r.Comment,
+                    Comment = WebUtility.HtmlDecode(r.Comment),
                     DatePublished = r.PostedOn.ToString("dd MMM yyyy"),
                     Username = r.User.UserName
                 })
@@ -74,7 +75,7 @@
                 BookId = Guid.Parse(model.BookId),
                 UserId = Guid.Parse(userId),
                 Rating = model.UserReview.Rating,
-                Comment = model.UserReview.Comment
+                Comment = WebUtility.HtmlEncode(model.UserReview.Comment)
             };
 
             await dbContext.Reviews.AddAsync(review);
