@@ -1,4 +1,5 @@
-﻿using ReviewMuse.Web.Models.ImportModels;
+﻿using ReviewMuse.Web.Models.ExportModels;
+using ReviewMuse.Web.Models.ImportModels;
 
 namespace ReviewMuse.Services.Contracts
 {
@@ -8,6 +9,8 @@ namespace ReviewMuse.Services.Contracts
         Task<bool> IsUserEditorByIdNonActive(Guid id);
 
         Task<string> GetEditorIdViaUserIdAsync(Guid userId);
+
+        Task<IEnumerable<ExpoPartialBookViewModel>> GetEditorBooksAsync(string editorId);
 
         Task AddNewLanguage(ImpoLanguageViewModel model);
 

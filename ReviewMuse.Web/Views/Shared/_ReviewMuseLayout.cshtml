@@ -46,6 +46,8 @@
                         @if (userIsEditor)
                         {
                             <li><a asp-area="" asp-controller="Author" asp-action="GetAuthorsForAddingBook">Add New Book <span title="Editor Profile" class="glyphicon glyphicon-pencil"></span></a></li>
+
+                            <li><a asp-area="" asp-controller="Editor" asp-action="GetEditorBooks">My Books <span title="Editor Profile" class="glyphicon glyphicon-book"></span></a></li>
                         }
 
                         @if (!userIsEditor)

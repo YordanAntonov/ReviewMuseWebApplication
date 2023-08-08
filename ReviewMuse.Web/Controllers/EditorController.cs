@@ -4,6 +4,7 @@
 
     using ReviewMuse.Services.Contracts;
     using ReviewMuse.Web.Infrastructure.Extensions;
+    using ReviewMuse.Web.Models.ExportModels;
     using ReviewMuse.Web.Models.ImportModels;
     using Stripe;
     using Stripe.Checkout;
@@ -679,6 +680,37 @@
 
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetEditorBooks()
+        {
+            try
+            {
+                string userId = this.User.GetId();
+
+                bool isUserEditor = await this.editorService.IsUserEditorById(Guid.Parse(userId));
+
+                if (!isUserEditor)
+                {
+                    TempData["ErrorMessage"] = "Unathorized access! You must be an editor in order to access this page!";
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                string editorId = await this.editorService.GetEditorIdViaUserIdAsync(Guid.Parse(userId));
+
+                IEnumerable<ExpoPartialBookViewModel> model = await this.editorService.GetEditorBooksAsync(editorId);
+
+                return View(model);
+            }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = generalErrorConst;
+
+                return RedirectToAction("Index", "Home");
+            }         
+
         }
     }
 }

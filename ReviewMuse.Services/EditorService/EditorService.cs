@@ -6,6 +6,7 @@
     using ReviewMuse.Data.Models;
     using ReviewMuse.Data.Models.MappingTables;
     using ReviewMuse.Services.Contracts;
+    using ReviewMuse.Web.Models.ExportModels;
     using ReviewMuse.Web.Models.ImportModels;
 
     public class EditorService : IEditorService
@@ -158,6 +159,25 @@
                 AmazonLink = book.AmazonUrl
             };
 
+            return model;
+        }
+
+        public async Task<IEnumerable<ExpoPartialBookViewModel>> GetEditorBooksAsync(string editorId)
+        {
+            IEnumerable<ExpoPartialBookViewModel> model = await this.dbContext
+                .Books
+                .Where(b => b.EditorId.ToString() == editorId && b.IsActive)
+                .Select(b => new ExpoPartialBookViewModel()
+                {
+                    Id = b.Id.ToString(),
+                    Title = b.Title,
+                    ImageUrl = b.ImageUrl,
+                    AuthorNames = b.BookAuthors.Select(a => a.Author.FullName)
+                    .ToArray(),
+                })
+                .OrderBy(b => b.Title)
+                .ToArrayAsync();
+                
             return model;
         }
 
