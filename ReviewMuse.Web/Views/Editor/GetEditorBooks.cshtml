@@ -6,20 +6,27 @@
 
 <div class="container-fluid editorBooks">
     <h2>Book added by me:</h2>
-    <div class="book-container2">
-        @foreach (var book in Model)
-        {
-            <div class="book-card3">
-                <a asp-controller="Book" asp-action="GetBookById" asp-route-id="@book.Id">
-                    <h2>@book.Title</h2>
-                    <p>@string.Join(", ", book.AuthorNames)</p>
-                    @if (!string.IsNullOrEmpty(book.ImageUrl))
-                    {
-                        <img src="@book.ImageUrl" alt="Book Cover">
-                    }
-                </a>
-            </div>
-        }
-    </div>
+    @if (!Model.Any())
+    {
+        <p class="emptyBooks">You dont have any books added in the application yet!</p>
+    }
+    else
+    {
+        <div class="book-container2">
+            @foreach (var book in Model)
+            {
+                <div class="book-card3">
+                    <a asp-controller="Book" asp-action="GetBookById" asp-route-id="@book.Id">
+                        <h2>@book.Title</h2>
+                        <p>@string.Join(", ", book.AuthorNames)</p>
+                        @if (!string.IsNullOrEmpty(book.ImageUrl))
+                        {
+                            <img src="@book.ImageUrl" alt="Book Cover">
+                        }
+                    </a>
+                </div>
+            }
+        </div>
+    }
 
 </div>
