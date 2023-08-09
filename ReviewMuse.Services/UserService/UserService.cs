@@ -86,7 +86,7 @@
         {
             var totalReviews = await this.dbContext
                 .Reviews
-                .Where(r => r.UserId.ToString() == userId)
+                .Where(r => r.UserId.ToString() == userId && r.IsActive)
                 .ToListAsync();
 
             int count = totalReviews.Count();
@@ -98,7 +98,7 @@
         {
             var reviews = await this.dbContext
                 .Reviews
-                .Where(r => r.UserId.ToString() == userId)
+                .Where(r => r.UserId.ToString() == userId && r.IsActive)
                 .ToListAsync();
 
             int count = 0;

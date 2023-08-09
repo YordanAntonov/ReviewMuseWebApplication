@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReviewMuse.Services.Models"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F15422E3-8DEF-4755-B92D-A91B092C40EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewMuse.Services.Tests", "..\ReviewMuse.Services.Tests\ReviewMuse.Services.Tests.csproj", "{3EE1F0BA-2D25-4040-860C-9970F75C10FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{94A50684-CD82-4EAA-A96B-3AED68A41F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94A50684-CD82-4EAA-A96B-3AED68A41F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94A50684-CD82-4EAA-A96B-3AED68A41F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EE1F0BA-2D25-4040-860C-9970F75C10FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EE1F0BA-2D25-4040-860C-9970F75C10FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EE1F0BA-2D25-4040-860C-9970F75C10FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EE1F0BA-2D25-4040-860C-9970F75C10FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +83,7 @@ Global
 		{7608D671-E984-4678-BA15-CDE8FDB4FE3F} = {BAD72C0E-25F5-4EC5-B1A4-F0237A1B58B4}
 		{0DADC09F-BC73-4639-9308-93DA831CE773} = {98870FE4-870F-45D3-ADBC-ADC881F9FB2E}
 		{94A50684-CD82-4EAA-A96B-3AED68A41F7A} = {98870FE4-870F-45D3-ADBC-ADC881F9FB2E}
+		{3EE1F0BA-2D25-4040-860C-9970F75C10FE} = {F15422E3-8DEF-4755-B92D-A91B092C40EB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E704390C-D323-4DE8-AD61-CDDC992B2342}
