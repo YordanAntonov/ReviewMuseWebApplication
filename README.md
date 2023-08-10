@@ -1,3 +1,6 @@
+Database View:
+[ReviewMuseDatabaseSnapshot(1.0).pdf](https://github.com/YordanAntonov/ReviewMuseWebApplication/files/12315489/ReviewMuseDatabaseSnapshot.1.0.pdf)
+
 # ReviewMuseWebApplication
  Final Project for ASP.NET Advanced course August 2023.
 Test Account for the Stripe Payment:
