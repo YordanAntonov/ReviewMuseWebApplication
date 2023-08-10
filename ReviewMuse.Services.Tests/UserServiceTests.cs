@@ -89,7 +89,7 @@
         [Test]
         public async Task UserHasBooksInFvouriteShouldReturnTrue()
         {
-            string userId = NormalUser.Id.ToString();
+            string userId = NonActiveEditor.Id.ToString();
             string bookId = Book1.Id.ToString();
 
             bool hasBook = await this.userService.UserHasBookAsFavouriteAsync(bookId, userId);

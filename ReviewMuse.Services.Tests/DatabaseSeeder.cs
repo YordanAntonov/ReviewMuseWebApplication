@@ -128,7 +128,7 @@ namespace ReviewMuse.Services.Tests
 
             UsersBooks1 = new UsersBooks()
             {
-                ApplicationUser = NormalUser,
+                ApplicationUser = NonActiveEditor,
                 Book = Book1,
                 IsActive = true,
             };
