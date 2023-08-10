@@ -25,6 +25,8 @@ namespace ReviewMuse.Services.Tests
 
         public static UsersBooks UsersBooks1;
 
+        public static Category Category1;
+
         public static void SeedDatabase(ReviewMuseDbContext dbContext)
         {
             UserEditor = new ApplicationUser()
@@ -133,6 +135,13 @@ namespace ReviewMuse.Services.Tests
                 IsActive = true,
             };
 
+            Category1 = new Category()
+            {
+                Id = 100,
+                CategoryName = "Drama",
+                Description = "Very dramatic ganre"
+            };
+
             dbContext.Users.Add(UserEditor);
             dbContext.Users.Add(NormalUser);
             dbContext.Editors.Add(Editor);
@@ -141,6 +150,7 @@ namespace ReviewMuse.Services.Tests
             dbContext.Authors.Add(Author1);
             dbContext.Reviews.Add(Review1);
             dbContext.UsersBooks.Add(UsersBooks1);
+            dbContext.Categories.Add(Category1);
 
             dbContext.SaveChanges();
         }
