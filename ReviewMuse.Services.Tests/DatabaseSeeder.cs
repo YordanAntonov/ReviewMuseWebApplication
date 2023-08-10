@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework.Internal.Execution;
 using ReviewMuse.Data;
 using ReviewMuse.Data.Models;
+using ReviewMuse.Data.Models.MappingTables;
 
 namespace ReviewMuse.Services.Tests
 {
@@ -20,6 +21,10 @@ namespace ReviewMuse.Services.Tests
 
         public static Author Author1;
 
+        public static Review Review1;
+
+        public static UsersBooks UsersBooks1;
+
         public static void SeedDatabase(ReviewMuseDbContext dbContext)
         {
             UserEditor = new ApplicationUser()
@@ -34,6 +39,17 @@ namespace ReviewMuse.Services.Tests
                 SecurityStamp = "ca32c787-626e-4234-a4e4-8c94d85a2b1c",
                 TwoFactorEnabled = false
             };
+
+            Review1 = new Review()
+            {
+                Id = new Guid("2ab7b29b-bdd3-4423-af4f-14820ac7fb95"),
+                UserId = new Guid("173db7a0-e1ad-45b5-82be-a871643ea3fb"),
+                BookId = new Guid("e8d72eb0-e4df-41a4-8e8e-89394018dd54"),
+                Comment = "This is the greatest book of all time",
+                Rating = 4,
+                IsActive = true,
+            };
+
 
             NormalUser = new ApplicationUser()
             {
@@ -110,12 +126,21 @@ namespace ReviewMuse.Services.Tests
                 Pseudonim = "Tommy"
             };
 
+            UsersBooks1 = new UsersBooks()
+            {
+                ApplicationUser = NormalUser,
+                Book = Book1,
+                IsActive = true,
+            };
+
             dbContext.Users.Add(UserEditor);
             dbContext.Users.Add(NormalUser);
             dbContext.Editors.Add(Editor);
             dbContext.Editors.Add(NonEditor);
             dbContext.Books.Add(Book1);
             dbContext.Authors.Add(Author1);
+            dbContext.Reviews.Add(Review1);
+            dbContext.UsersBooks.Add(UsersBooks1);
 
             dbContext.SaveChanges();
         }

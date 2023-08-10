@@ -79,7 +79,7 @@
             };
 
             return model;
-                
+
         }
 
         public async Task<int> GetUserTotalReviews(string userId)
@@ -148,19 +148,19 @@
                 && b.BookUsers.Any(bu => bu.ApplicationUserId.ToString() == userId))
                 .OrderBy(b => b.PublishingDate),
                 BookSorting.Title => booksQuery
-                .Where(b => b.IsActive 
+                .Where(b => b.IsActive
                 && b.BookUsers.Any(bu => bu.ApplicationUserId.ToString() == userId))
                 .OrderBy(b => b.Title),
                 BookSorting.Author => booksQuery
-                .Where(b => b.IsActive 
+                .Where(b => b.IsActive
                 && b.BookUsers.Any(bu => bu.ApplicationUserId.ToString() == userId))
                 .OrderBy(b => b.BookAuthors.Select(a => a.Author.FullName).First()),
                 BookSorting.RatingDescending => booksQuery
-                .Where(b => b.IsActive 
+                .Where(b => b.IsActive
                 && b.BookUsers.Any(bu => bu.ApplicationUserId.ToString() == userId))
                 .OrderByDescending(b => b.TotalRating),
                 BookSorting.RatingAscending => booksQuery
-                .Where(b => b.IsActive 
+                .Where(b => b.IsActive
                 && b.BookUsers.Any(bu => bu.ApplicationUserId.ToString() == userId))
                 .OrderBy(b => b.TotalRating),
             };
@@ -179,7 +179,7 @@
                         Id = a.AuthorId.ToString(),
                         Name = a.Author.Pseudonim
                     })
-                    .ToArray()!                
+                    .ToArray()!
                 })
                 .ToArrayAsync();
 
@@ -218,6 +218,21 @@
                 this.dbContext.Editors.Remove(editor);
             }
 
+            bool hasBooksInCollection = await this.dbContext.UsersBooks.AnyAsync(ub => ub.ApplicationUserId.ToString() == user.Id.ToString());
+
+            if (hasBooksInCollection)
+            {
+                var usersBooks = await this.dbContext
+                    .UsersBooks
+                    .Where(ub => ub.ApplicationUserId.ToString() == user.Id.ToString())
+                    .ToListAsync();
+
+                foreach (var book in usersBooks)
+                {
+                    this.dbContext.UsersBooks.Remove(book);
+                }
+            }
+
             this.dbContext.Users.Remove(user);
             await this.dbContext.SaveChangesAsync();
         }
@@ -241,6 +256,6 @@
                 .UsersBooks.AnyAsync(b => b.IsActive && b.BookId.ToString() == bookId && b.ApplicationUserId.ToString() == userId);
         }
 
-        
+
     }
 }
